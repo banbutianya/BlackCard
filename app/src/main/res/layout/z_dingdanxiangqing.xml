@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#000000">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/allback"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单详情"
+            android:textSize="15sp"
+            android:textColor="#FFFFFF"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageView
+            android:id="@+id/service"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_launcher"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_1"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_below="@id/relativeLayout"
+        android:background="#FFCC66">
+
+        <TextView
+            android:id="@+id/tips_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请在"
+            android:textColor="#FF9900"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/remain_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="33:26"
+            android:layout_toRightOf="@id/tips_1"
+            android:layout_centerVertical="true"
+            android:textColor="#CC0000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="内进行支付，以避免耽误出行"
+            android:textColor="#FF9900"
+            android:layout_toRightOf="@id/remain_time"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/relativelayout_1"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/image_1"
+            android:src="@drawable/jiantou"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/flight_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="01小时30分钟"
+            android:textSize="10sp"
+            android:textColor="#CCCCCC"
+            android:layout_above="@id/image_1"
+            android:layout_centerHorizontal="true"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <View
+                android:id="@+id/view_1"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="周四"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/view_1"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:id="@+id/dates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10月19日"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/week"
+                android:layout_marginRight="8dp"/>
+
+            <TextView
+                android:id="@+id/chufadidian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="大连"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/view_1"
+                android:layout_marginLeft="5dp"/>
+
+            <ImageView
+                android:id="@+id/image_2"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/jiantougray"
+                android:layout_toRightOf="@id/chufadidian"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/daodadidian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="北京"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/image_2"
+                android:layout_marginLeft="10dp"/>
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/chufa_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="22:50"
+            android:textSize="16sp"
+            android:layout_toLeftOf="@id/image_1"
+            android:layout_alignBottom="@id/flight_time"
+            android:layout_marginRight="40dp"/>
+
+        <TextView
+            android:id="@+id/chufajichang_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="周水子"
+            android:textSize="13sp"
+            android:layout_below="@id/image_1"
+            android:layout_toLeftOf="@id/image_1"
+            android:layout_marginRight="40dp"/>
+
+        <TextView
+            android:id="@+id/daoda_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:20"
+            android:textSize="16sp"
+            android:layout_toRightOf="@id/image_1"
+            android:layout_alignBottom="@id/flight_time"
+            android:layout_marginLeft="40dp"/>
+
+        <TextView
+            android:id="@+id/daodajichang_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="首都T2"
+            android:textSize="13sp"
+            android:layout_below="@id/image_1"
+            android:layout_toRightOf="@id/image_1"
+            android:layout_marginLeft="40dp"/>
+
+        <TextView
+            android:id="@+id/hangbanhao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="东航MU2311"
+            android:textSize="10sp"
+            android:textColor="#CCCCCC"
+            android:layout_below="@id/daodajichang_name"
+            android:layout_marginLeft="120dp"/>
+
+        <View
+            android:id="@+id/view_2"
+            android:layout_width="0.5dp"
+            android:layout_height="12dp"
+            android:layout_toRightOf="@id/hangbanhao"
+            android:layout_alignTop="@id/hangbanhao"
+            android:background="#CCCCCC"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/zuoweihao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="320(中)"
+            android:textSize="10sp"
+            android:textColor="#CCCCCC"
+            android:layout_toRightOf="@id/view_2"
+            android:layout_below="@id/daodajichang_name"
+            android:layout_marginLeft="5dp"/>
+
+        <View
+            android:id="@+id/view_3"
+            android:layout_width="0.5dp"
+            android:layout_height="12dp"
+            android:background="#CCCCCC"
+            android:layout_toRightOf="@id/zuoweihao"
+            android:layout_alignTop="@id/hangbanhao"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/cangwei_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="经济舱"
+            android:textSize="10sp"
+            android:textColor="#CCCCCC"
+            android:layout_toRightOf="@id/view_3"
+            android:layout_below="@id/daodajichang_name"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/tips_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="该航班支付成功后180分钟内出票"
+            android:textSize="10sp"
+            android:textColor="#FF9900"
+            android:layout_below="@id/hangbanhao"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="12dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_4"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_below="@id/relativeLayout_2">
+
+        <TextView
+            android:id="@+id/dingdan_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单状态"
+            android:textSize="13sp"
+            android:textColor="#CCCCCC"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/dingdan_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="待付款"
+            android:textColor="#FF9900"
+            android:layout_toRightOf="@id/dingdan_state"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="7dp"/>
+
+        <TextView
+            android:id="@+id/dingdan_zongjia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单总价"
+            android:textSize="13sp"
+            android:textColor="#CCCCCC"
+            android:layout_below="@id/dingdan_state"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/dingdan_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥195.00"
+            android:textColor="#FF0000"
+            android:layout_below="@id/dingdan_state"
+            android:layout_toRightOf="@id/dingdan_zongjia"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="7dp"/>
+
+        <TextView
+            android:id="@+id/cost_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="费用明细"
+            android:textColor="#FF9900"
+            android:textSize="11sp"
+            android:layout_toRightOf="@id/dingdan_price"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="2dp"
+            android:layout_alignBottom="@id/dingdan_price"/>
+
+        <TextView
+            android:id="@+id/dingdan_hao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订  单  号"
+            android:textSize="13sp"
+            android:textColor="#CCCCCC"
+            android:layout_below="@id/dingdan_zongjia"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/dingdan_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100700110095163"
+            android:layout_below="@id/dingdan_price"
+            android:layout_toRightOf="@id/dingdan_hao"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="7dp"/>
+
+        <View
+            android:id="@+id/view_4"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/dingdan_hao"
+            android:background="#CCCCCC"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/tips_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退改签及购票说明"
+            android:textSize="12sp"
+            android:textColor="#FF9900"
+            android:layout_below="@id/view_4"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="12dp"/>
+
+        <Button
+            android:id="@+id/commit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="立即支付"
+            android:layout_below="@id/tips_3"
+            android:background="#CC9933"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

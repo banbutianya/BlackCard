@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_dingdan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.a10953.blackcard.z_work.dingdanActivity">
+
+    <TextView
+        android:id="@+id/tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="剩余支付时间"
+        android:textSize="14sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="14:43"
+        android:textSize="38sp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/tips"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#CCCCCC"
+        android:layout_below="@id/countdown"
+        android:layout_marginTop="25dp">
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/jipiao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="机票"
+        android:layout_below="@id/line1"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/didian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="大连→北京"
+        android:layout_toRightOf="@id/jipiao"
+        android:layout_alignTop="@id/jipiao"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/dates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10月17日"
+        android:layout_toRightOf="@id/didian"
+        android:layout_alignTop="@id/jipiao"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="23:00起飞"
+        android:layout_toRightOf="@id/dates"
+        android:layout_alignTop="@id/jipiao"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="待支付金额："
+        android:layout_below="@id/jipiao"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@id/jipiao"/>
+
+    <TextView
+        android:id="@+id/money_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¥1266.00"
+        android:textColor="#FF0000"
+        tools:layout_toRightOf="@id/money"
+        android:layout_alignTop="@id/money"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/money"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/weixin_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/weixinicon"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/weixinzhifu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="微信支付"
+            android:layout_alignTop="@id/weixin_image"
+            android:layout_toRightOf="@id/weixin_image"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"/>
+
+        <LinearLayout
+            android:id="@+id/weixin"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/weixinzhifu"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/moren"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCCCCC"
+            android:layout_below="@id/weixin_image"
+            android:layout_marginTop="5dp">
+        </LinearLayout>
+
+
+
+        <ImageView
+            android:id="@+id/heika_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/heikayueicon"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/weixin_image"/>
+
+        <TextView
+            android:id="@+id/heikazhifu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="黑卡支付"
+            android:layout_alignTop="@id/heika_image"
+            android:layout_toRightOf="@id/heika_image"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/heikazhifu"
+            android:text="(该功能即将上线，敬请期待)"
+            android:layout_alignBottom="@id/heikazhifu"
+            android:textSize="12sp"/>
+
+        <LinearLayout
+            android:id="@+id/zhifubao"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/heikazhifu"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/moren"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CCCCCC"
+            android:layout_below="@id/heika_image"
+            android:layout_marginTop="5dp">
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/commit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="确认支付"
+            android:background="#EF7D31"
+            android:layout_below="@id/heika_image"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

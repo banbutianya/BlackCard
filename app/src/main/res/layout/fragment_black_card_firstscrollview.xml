@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="260dp">
+
+    <LinearLayout
+        android:id="@+id/head_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="#aaddff">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/finddeletee"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:text="BLACK YOUNR"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/mine_yaoqing"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_information"
+        android:layout_width="350dp"
+        android:layout_height="130dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="#FFFFFF">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/heikasucai"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/head"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="15dp"
+                        android:src="@drawable/morentu"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/imageView"
+                        android:layout_marginBottom="13dp"
+                        android:layout_toEndOf="@+id/head"
+                        android:text="张天傲先生"
+                        android:id="@+id/textView"/>
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_alignBottom="@+id/head"
+                        android:background="#000000"/>
+
+                    <TextView
+                        android:id="@+id/total_assets"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="总资产"
+                        android:layout_below="@+id/imageView"
+                        android:layout_toEndOf="@+id/head"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"/>
+
+                    <ImageButton
+                        android:id="@+id/imageButton"
+                        android:scaleType="centerCrop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/total_assets"
+                        android:layout_alignBottom="@id/total_assets"
+                        android:layout_alignTop="@+id/total_assets"
+                        android:src="@drawable/yanjing"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:layout_below="@+id/total_assets"
+                        android:layout_alignStart="@+id/total_assets"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/relativelayout_information">
+
+        <LinearLayout
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/zhuye1"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:textSize="10sp"
+                android:gravity="center"
+                android:text="高尔夫俱乐部会员"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/zhuye3"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:textSize="10sp"
+                android:layout_gravity="center"
+                android:text="游艇会成员"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/zhuye2"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:textSize="10sp"
+                android:layout_gravity="center"
+                android:text="马术俱乐部会员"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/shouyetu4"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:textSize="10sp"
+                android:layout_gravity="center"
+                android:text="马术俱乐部会员"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

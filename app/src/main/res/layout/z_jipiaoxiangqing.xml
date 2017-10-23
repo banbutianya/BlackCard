@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1E1E1"
+    >
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#000000">
+
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/jiantou"
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:id="@+id/chufadi"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="大连"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_toLeftOf="@id/image1"
+            android:layout_marginRight="8dp"
+            android:gravity="center"/>
+
+
+
+        <TextView
+            android:id="@+id/mudidi"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="北京"
+            android:textSize="18dp"
+            android:textColor="#FFFFFF"
+            android:layout_toRightOf="@id/image1"
+            android:layout_marginLeft="8dp"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_2"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@id/relativelayout_1">
+
+        <TextView
+            android:id="@+id/hangbanhao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="南航CZ6123"
+            android:textSize="30sp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@id/hangbanhao"
+            >
+
+
+
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/jiantougray"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/relativeLayout"
+                android:layout_toLeftOf="@id/image2"
+                android:layout_centerVertical="true"
+                >
+
+                <TextView
+                    android:id="@+id/chufa_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="22:30"
+                    android:textSize="24sp"/>
+
+                <TextView
+                    android:id="@+id/chufajichang_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="周水子"
+                    android:layout_below="@id/chufa_time"
+                    android:layout_centerHorizontal="true"/>
+
+            </RelativeLayout>
+
+
+
+            <TextView
+                android:id="@+id/chufariqi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10月24日"
+                android:textSize="10sp"
+                android:textColor="#FF9900"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@id/image2"
+                android:layout_marginBottom="-9dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/image2"
+                android:layout_centerVertical="true"
+                android:id="@+id/relativeLayout2">
+
+                <TextView
+                    android:id="@+id/daoda_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="23:45"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/daodajichang_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="北京"
+                    android:layout_below="@id/daoda_time"
+                    android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ditu"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/imageView3" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="价格实时变动，如有需要请尽快预定"
+        android:layout_alignParentBottom = "true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:textSize="10sp"/>
+
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/relativelayout_2"
+        android:layout_above="@id/tips"
+        android:layout_marginBottom="10dp">
+
+    </ListView>
+
+</RelativeLayout>

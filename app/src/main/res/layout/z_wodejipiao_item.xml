@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="175dp"
+    android:layout_marginBottom="10dp">
+
+    <TextView
+        android:id="@+id/hangbanhao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QHBZA177414119052"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"/>
+
+    <LinearLayout
+        android:id="@+id/line1"
+        android:layout_width="2dp"
+        android:layout_height="15dp"
+        android:background="#CCCCCC"
+        android:layout_alignTop="@id/hangbanhao"
+        android:layout_toRightOf="@id/hangbanhao"
+        android:layout_marginLeft="8dp">
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="待付款"
+        android:layout_toRightOf="@id/line1"
+        android:layout_alignTop="@id/hangbanhao"
+        android:layout_marginLeft="10dp"
+        android:textColor="#FF6633"/>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/hangbanhao">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:src="@drawable/feijiicon"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/dates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10.18 CZ6123"
+            android:textSize="10sp"
+            android:textColor="#FF6633"
+            android:layout_below="@id/image"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/chufajichang_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="大连"
+            android:textSize="22sp"
+            android:layout_alignBottom="@id/image"
+            android:layout_toLeftOf="@id/image"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="3dp"/>
+
+        <TextView
+            android:id="@+id/chufa_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23:00"
+            android:textSize="12sp"
+            android:layout_below="@id/chufajichang_name"
+            android:layout_toLeftOf="@id/image"
+            android:layout_marginRight="48dp"/>
+
+        <TextView
+            android:id="@+id/daodajichang_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="北京"
+            android:textSize="22sp"
+            android:layout_alignBottom="@id/image"
+            android:layout_toRightOf="@id/image"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="3dp"/>
+
+        <TextView
+            android:id="@+id/daoda_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:30"
+            android:textSize="12sp"
+            android:layout_below="@id/daodajichang_name"
+            android:layout_toRightOf="@id/image"
+            android:layout_marginLeft="48dp"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="合计："
+        android:textSize="12sp"
+        android:layout_below="@id/relativeLayout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:id="@+id/price_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¥226"
+        android:textSize="12sp"
+        android:textColor="#FF6633"
+        android:layout_toRightOf="@id/price"
+        android:layout_alignTop="@id/price"/>
+
+    <Button
+        android:id="@+id/pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="立即付款"
+        android:textSize="12sp"
+        android:textColor="#FFFFFF"
+        android:background="#EF7D31"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/relativeLayout"/>
+
+</RelativeLayout>
