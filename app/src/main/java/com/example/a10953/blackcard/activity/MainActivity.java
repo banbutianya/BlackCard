@@ -106,9 +106,7 @@ public class MainActivity extends AppCompatActivity{
     Runnable runnable = new Runnable(){
         @Override
         public void run() {
-            //
             // TODO: http request,请求Butler数据
-            //
             StringRequest stringRequestWelFare = new StringRequest(com.android.volley.Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -199,6 +197,5 @@ public class MainActivity extends AppCompatActivity{
         }
         return  mdata;
     }
-
 
 }

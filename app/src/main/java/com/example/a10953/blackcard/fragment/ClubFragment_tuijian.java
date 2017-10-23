@@ -38,6 +38,8 @@ public class ClubFragment_tuijian extends Fragment {
     private String TAG = "ClubFragment_tuijian";
     //访问网络的URL
     private String url = "http://api.qing-hei.com/index.php/Index/Api?type=newfind";
+    //设置分页
+    private int page = 1;
 
     //登录ID
     private String uid;
@@ -48,8 +50,10 @@ public class ClubFragment_tuijian extends Fragment {
 
     //topicList列表，从网络上获取下来的
     private ArrayList<JSONObject> topiclist;
-    //
+    //我的关注列表
     private ArrayList<JSONObject> myflowlist;
+    //推荐列表
+    private ArrayList<JSONObject> creamlist;
     //传给ViewPager适配器的数据，包含一个URL和一个ImageView
     private ArrayList<Map<String,Object>> mapList;
 
@@ -165,15 +169,6 @@ public class ClubFragment_tuijian extends Fragment {
                         //把"topic"字段的数据取出来，这是一个JSONArray
                         JSONArray topicarray = data.getJSONArray("topic");
 
-                        //把“myflow”字段的数据取出来，这也是一个JSonArray
-                        JSONArray myflow = data.getJSONArray("myflow");
-                        Log.i(TAG,"myfllow字段的数据为 " + myflow.toString());
-                        //新建一个JSONObject类型的列表datass，将myflow列表中的数据解析出来
-                        ArrayList<JSONObject> datass = new ArrayList<>();
-                        for(int i=0;i<myflow.length();i++){
-                            datass.add(myflow.getJSONObject(i));
-                        }
-
                         //新建一个JSONObject类型的列表datas，将toicarray列表中的数据解析出来
                         ArrayList<JSONObject> datas = new ArrayList<JSONObject>();
                         for (int i = 0; i < topicarray.length(); i++) {
@@ -191,14 +186,32 @@ public class ClubFragment_tuijian extends Fragment {
                             headArray.add(headArrayCopy.get(i));
                         }
 
-                        //初始化myflowlist，并将datass赋给myflowlist，
-                        myflowlist = new ArrayList<>();
-                        myflowlist = datass;
-                        //myflowlist.addAll(datass);
-
                         //初始化topilist，并将datas赋给topiclist。（应该可以不用datas，直接将topiclist赋值，一会试一下）
                         topiclist = new ArrayList<>();
                         topiclist = datas;
+
+                        //把“myflow”字段的数据取出来，这也是一个JSonArray
+                        JSONArray myflow = data.getJSONArray("myflow");
+                        Log.i(TAG,"myfllow字段的数据为 " + myflow.toString());
+                        //新建一个JSONObject类型的列表datass，将myflow列表中的数据解析出来
+                        ArrayList<JSONObject> datass = new ArrayList<>();
+                        for(int i=0;i<myflow.length();i++){
+                            datass.add(myflow.getJSONObject(i));
+                        }
+
+                        //初始化myflowlist，并将datass赋给myflowlist，
+                        myflowlist = new ArrayList<>();
+                        myflowlist = datass;
+
+                        //把“cream”字段取出来，这也是一个JsonArray
+                        JSONArray cream = data.getJSONArray("cream");
+                        ArrayList<JSONObject> datasss = new ArrayList<>();
+                        for(int i = 0; i < cream.length(); i++){
+                            datasss.add(cream.getJSONObject(i));
+                        }
+                        creamlist = new ArrayList<>();
+                        creamlist = datasss;
+
                         //mapList是传给CarouselcopyAdapter的List<Map<String,object>>
                         mapList = getUrlData();
 
@@ -207,7 +220,7 @@ public class ClubFragment_tuijian extends Fragment {
                     }
 
                     clubTuijianAdapter.setHeadDates(headArray);
-                    clubTuijianAdapter.setDate(myflowlist);
+                    clubTuijianAdapter.setDate(creamlist,uid,token);
 
                     //新建一个CarouselcopyAdapter，并通过构造函数将context传递过去
                     CarouselcopyAdapter carouselcopyAdapter = new CarouselcopyAdapter(context);
@@ -248,7 +261,7 @@ public class ClubFragment_tuijian extends Fragment {
                     //post参数，UID是会员ID，token会变，通过Intent传递过来的
                     map.put("uid", uid);
                     map.put("token", token);
-                    map.put("page","1");
+                    map.put("page",String.valueOf(page));
                     return map;
                 }
             };

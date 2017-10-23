@@ -1,35 +1,44 @@
 package com.example.a10953.blackcard.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.media.Image;
-import android.provider.ContactsContract;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
+import com.example.a10953.blackcard.MyApplication;
 import com.example.a10953.blackcard.R;
 import com.example.a10953.blackcard.Util.RoundTransform;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.example.a10953.blackcard.R.id.viewPager;
 
 /**
  * Created by 10953 on 2017/10/16.
@@ -40,6 +49,13 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
     private String TAG = "ClubTuijianAdapter";
     public static final int TYPE_HEADER = 0;
     public static final int TYPE_NORMAL = 1;
+
+    //登录ID
+    private String uid;
+    //登录Token
+    private String token;
+    //访问网络的URL
+    private String url = "http://api.qing-hei.com/index.php/Index/Api?type=newfind";
 
     private Context context;
 
@@ -52,13 +68,21 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
     private String user_nick_text;
     private String user_upimg_text;
 
-    private List<JSONObject> myflowlist = new ArrayList<>();
+    private ArrayList<JSONObject> myflowlist = new ArrayList<>();
+    private ArrayList<JSONObject> creamlist = new ArrayList<>();
+
+    private ArrayList<Map<String,Object>> mapList = new ArrayList<>();
 
     private ArrayList<JSONObject> headDates = new ArrayList<>();
 
-    private List<String> urlList=new ArrayList<>();
+    private ArrayList<String> urlList=new ArrayList<>();
 
     private View mHeaderView;
+
+    //显示图片的ViewPager
+    private ViewPager viewPager;
+    //ViewPager下方的小圆点
+    private LinearLayout pointGroup;
 
 
     public void setContext(Context context){
@@ -89,8 +113,10 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
         notifyDataSetChanged();
     }
 
-    public void setDate(List<JSONObject> myflowlist) {
-        this.myflowlist = myflowlist;
+    public void setDate(ArrayList<JSONObject> creamlist, String uid, String token) {
+        this.creamlist = creamlist;
+        this.uid = uid;
+        this.token = token;
         notifyDataSetChanged();
     }
 
@@ -122,7 +148,7 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
 
     @Override
     public int getItemCount() {
-        return mHeaderView == null ? myflowlist.size() : myflowlist.size() + 1;
+        return mHeaderView == null ? creamlist.size() : creamlist.size() + 1;
     }
 
     class ViewHolders extends RecyclerView.ViewHolder {
@@ -159,6 +185,7 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
         TextView myflow_name;
         TextView content;
         TextView praisenum;
+        ImageView levlevel_ico;
 
         ImageView image1;
         ImageView image2;
@@ -172,6 +199,11 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
             myflow_name = (TextView) itemView.findViewById(R.id.myflow_name);
             content = (TextView) itemView.findViewById(R.id.content);
             praisenum = (TextView) itemView.findViewById(R.id.praisenum);
+            levlevel_ico = (ImageView) itemView.findViewById(R.id.level_ico);
+
+            //ViewPage和PointGroup绑定对应的资源ID
+            viewPager = (ViewPager) itemView.findViewById(R.id.head_viewpager);
+            pointGroup = (LinearLayout) itemView.findViewById(R.id.pointgroup_2);
 
             image1 = (ImageView) itemView.findViewById(R.id.image1);
             image2 = (ImageView) itemView.findViewById(R.id.image2);
@@ -184,6 +216,8 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+
         if(getItemViewType(position) == TYPE_HEADER){
             if (holder instanceof ViewHolders) {
                 ViewHolders viewHolder = (ViewHolders) holder;
@@ -191,6 +225,7 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                 viewHolder.temperature.setText(temperature_text);
                 viewHolder.text.setText(text_text);
                 viewHolder.user_nick.setText(user_nick_text);
+
                 Glide.with(context).load(user_upimg_text).into(viewHolder.user_upimg);
                 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
                 StringBuffer date = new StringBuffer();
@@ -235,16 +270,19 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                 //添加具体数据
                 try {
 
-                    viewHolder.myflow_name.setText(myflowlist.get(pos).getString("name"));
-                    viewHolder.content.setText(myflowlist.get(pos).getString("content"));
+                    viewHolder.myflow_name.setText(creamlist.get(pos).getString("name"));
+                    viewHolder.content.setText(creamlist.get(pos).getString("content"));
                     Picasso.with(context)
-                            .load(myflowlist.get(pos).getString("head"))
+                            .load(creamlist.get(pos).getString("head"))
                             .transform(new RoundTransform())
                             .into(viewHolder.head);
-                    viewHolder.praisenum.setText(myflowlist.get(pos).getString("praisenum"));
+                    Picasso.with(context)
+                            .load(creamlist.get(pos).getString("level_ico"))
+                            .into(viewHolder.levlevel_ico);
+                    viewHolder.praisenum.setText(creamlist.get(pos).getString("praisenum"));
 
                     Pattern pattern = Pattern.compile("(http.+?\\.jpg)");
-                    Matcher matcher = pattern.matcher(myflowlist.get(pos).getString("image_urls"));
+                    Matcher matcher = pattern.matcher(creamlist.get(pos).getString("image_urls"));
                     while(matcher.find()) {
                         urlList.add(matcher.group());
                     }
@@ -334,8 +372,15 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                 }
                 urlList.clear();
 
+                if(position == getItemCount() - 1){
+                    //已经到达列表的底部,在这设置加载更多,自动加载
+                    Toast.makeText(context,"我是有底线的...",Toast.LENGTH_SHORT).show();
+
+                }
             }
 
         }
+
+
     }
 }

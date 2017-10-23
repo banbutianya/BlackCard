@@ -28,7 +28,7 @@
             android:layout_toRightOf="@id/head"/>
 
         <ImageView
-            android:id="@+id/image_grade"
+            android:id="@+id/level_ico"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:src="@drawable/sj"
