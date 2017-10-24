@@ -33,7 +33,6 @@ public class ClubFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
         mTitles = new ArrayList<>();
         mTitles.add("推荐");
         mTitles.add("关注");

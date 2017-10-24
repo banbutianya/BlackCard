@@ -2,8 +2,6 @@ package com.example.a10953.blackcard.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,16 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.RedirectError;
-import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.example.a10953.blackcard.MyApplication;
 import com.example.a10953.blackcard.R;
+import com.example.a10953.blackcard.Listener.HttpCallBackListener;
+import com.example.a10953.blackcard.Util.HttpUtil;
 import com.example.a10953.blackcard.adapter.ButlerAdapter;
 import com.example.a10953.blackcard.adapter.WelFareAdapter;
 import com.example.a10953.blackcard.bean.ButlerResponse;
@@ -33,7 +26,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by 10953 on 2017/10/10.
@@ -65,6 +57,7 @@ public class CardFragment extends Fragment{
 
     private String uid;
     private String token;
+    private int page;
 
     @Nullable
     @Override
@@ -73,6 +66,7 @@ public class CardFragment extends Fragment{
         Intent intent = getActivity().getIntent();
         uid = intent.getStringExtra("uid");
         token = intent.getStringExtra("token");
+        page = 1;
 
 
         View view = inflater.inflate(R.layout.fragment_black_card, container, false);
@@ -98,137 +92,100 @@ public class CardFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //开启子线程进行网络请求，通过handler更新界面。返回一个json字符串
-        //启动子线程
-        new Thread(runnable).start();
-        new Thread(runnable2).start();
-
+        //ButlerPost请求
+        ButlerPost();
+        //WelFare请求
+        WelFare(uid, token, String.valueOf(page));
     }
 
-    //新线程进行网络请求
-    Runnable runnable = new Runnable(){
-        @Override
-        public void run() {
-            //
-            // TODO: http request,请求Butler数据
-            //
-            StringRequest stringRequestButler = new StringRequest(com.android.volley.Request.Method.POST, urlButler, new com.android.volley.Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    JSONObject object = null;
-                    try {
-                        object = new JSONObject(response);
-                        JSONObject data = object.getJSONObject("data");
-                        if (data.getString("privilegenum") != null && data.getString("privilegenum").length() > 0) {
-                            count = Integer.parseInt(data.getString("privilegenum"));
-                        }
 
-                        //JSONArray 解析json数组
-                        JSONArray privilege = data.getJSONArray("privilege");
-                        ArrayList<JSONObject> datas = new ArrayList<JSONObject>();
-                        for (int i = 0; i < privilege.length(); i++) {
-                            datas.add(privilege.getJSONObject(i));
-                        }
-
-                        //添加数据？
-                        for (int i=0;i<count;i++){
-                            butlerResponse = new ButlerResponse();
-                            butlerResponse.setButler_item_text(datas.get(i).getString("tq_name"));
-                            butlerResponse.setImageViewUrl(datas.get(i).getString("tq_img"));
-                            if(butlerResponseList.size() < count) {
-                                butlerResponseList.add(butlerResponse);
-                            }
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+    private void ButlerPost() {
+        HashMap<String, String> map = new HashMap<>();
+        //post参数，UID是会员ID，token会变。
+        map.put("uid", uid);
+        map.put("token", token);
+        HttpUtil.sendStringRequestByPost(urlButler, map, new HttpCallBackListener() {
+            @Override
+            public void onSuccess(String response) {
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(response);
+                    JSONObject data = object.getJSONObject("data");
+                    if (data.getString("privilegenum") != null && data.getString("privilegenum").length() > 0) {
+                        count = Integer.parseInt(data.getString("privilegenum"));
                     }
 
-
-                    //显示butler数据
-                    butlerAdapter = new ButlerAdapter(getActivity());
-                    recycler_view_butler.setAdapter(butlerAdapter);
-                    butlerAdapter.setData(butlerResponseList);
-
-
-                }
-                }, new com.android.volley.Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i(TAG, "post请求失败" + error.toString());
+                    //JSONArray 解析json数组
+                    JSONArray privilege = data.getJSONArray("privilege");
+                    ArrayList<JSONObject> datas = new ArrayList<JSONObject>();
+                    for (int i = 0; i < privilege.length(); i++) {
+                        datas.add(privilege.getJSONObject(i));
                     }
-                }){
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        HashMap<String, String> map = new HashMap<>();
-                        //post参数，UID是会员ID，token会变。
-                        map.put("uid", uid);
-                        map.put("token", token);
-                        return map;
-                    }
-                };
 
-                MyApplication.getHttpQueue().add(stringRequestButler);
-
-        }
-    };
-
-
-    //新线程进行网络请求
-    Runnable runnable2 = new Runnable(){
-        @Override
-        public void run() {
-            //
-            // TODO: http request,请求Butler数据
-            //
-            StringRequest stringRequestWelFare = new StringRequest(com.android.volley.Request.Method.POST, urlWelFare, new com.android.volley.Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    JSONObject object = null;
-
-                    //解析Welfare  Json数据
-                    try {
-                        object = new JSONObject(response);
-                        JSONArray array = object.getJSONArray("data");
-
-                        Log.i(TAG,"json数据" + response.toString() );
-
-                        ArrayList<JSONObject> datas = new ArrayList<JSONObject>();
-                        for (int i = 0; i < array.length(); i++) {
-                            datas.add(array.getJSONObject(i));
-                            Log.i(TAG,"请求的第几个数据" + i );
+                    //添加数据？
+                    for (int i=0;i<count;i++){
+                        butlerResponse = new ButlerResponse();
+                        butlerResponse.setButler_item_text(datas.get(i).getString("tq_name"));
+                        butlerResponse.setImageViewUrl(datas.get(i).getString("tq_img"));
+                        if(butlerResponseList.size() < count) {
+                            butlerResponseList.add(butlerResponse);
                         }
-                        welfareArray = datas;
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-
-
-                    //显示welfare数据
-                    welfareAdapter = new WelFareAdapter(getActivity());
-                    recycler_view_welfare.setAdapter(welfareAdapter);
-                    welfareAdapter.setDate(welfareArray);
-
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            }, new com.android.volley.Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.i(TAG, "post请求失败" + error.toString());
-                }
-            }){
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    HashMap<String, String> mapwelfare = new HashMap<>();
-                    //post参数，UID是会员ID，token会变。
-                    mapwelfare.put("uid", uid);
-                    mapwelfare.put("token", token);
-                    mapwelfare.put("page","1");
-                    return mapwelfare;
-                }
-            };
-            MyApplication.getHttpQueue().add(stringRequestWelFare);
+                //显示butler数据
+                butlerAdapter = new ButlerAdapter(getActivity());
+                recycler_view_butler.setAdapter(butlerAdapter);
+                butlerAdapter.setData(butlerResponseList);
+            }
 
-        }
-    };
+            @Override
+            public void onFail(VolleyError volleyError) {
+                Log.i(TAG, "post请求失败" + volleyError.toString());
+            }
+        });
+    }
 
+    private void WelFare(String uid, String token, String page) {
+        HashMap<String, String> mapwelfare = new HashMap<>();
+        //post参数，UID是会员ID，token会变。
+        mapwelfare.put("uid", uid);
+        mapwelfare.put("token", token);
+        mapwelfare.put("page",page);
+        HttpUtil.sendStringRequestByPost(urlWelFare, mapwelfare, new HttpCallBackListener() {
+            @Override
+            public void onSuccess(String response) {
+                JSONObject object = null;
+
+                //解析Welfare  Json数据
+                try {
+                    object = new JSONObject(response);
+                    JSONArray array = object.getJSONArray("data");
+
+                    Log.i(TAG,"json数据" + response.toString() );
+
+                    ArrayList<JSONObject> datas = new ArrayList<JSONObject>();
+                    for (int i = 0; i < array.length(); i++) {
+                        datas.add(array.getJSONObject(i));
+                        Log.i(TAG,"请求的第几个数据" + i );
+                    }
+                    welfareArray = datas;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                //显示welfare数据
+                welfareAdapter = new WelFareAdapter(getActivity());
+                recycler_view_welfare.setAdapter(welfareAdapter);
+                welfareAdapter.setDate(welfareArray);
+            }
+
+            @Override
+            public void onFail(VolleyError volleyError) {
+                Log.i(TAG, "post请求失败" + volleyError.toString());
+            }
+        });
+    }
 
 }

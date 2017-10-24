@@ -1,16 +1,14 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.scwang.smartrefresh.layout.SmartRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.a10953.blackcard.fragment.ClubFragment_tuijian">
-
-    <!-- TODO: Update blank fragment layout -->
-
+    android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_tuijian"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:overScrollMode="never" />
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 
-</FrameLayout>
+

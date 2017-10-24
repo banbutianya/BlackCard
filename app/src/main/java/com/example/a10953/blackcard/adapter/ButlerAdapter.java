@@ -64,15 +64,12 @@ public class ButlerAdapter extends RecyclerView.Adapter<ButlerAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         ButlerResponse butlerResponse = mButlerList.get(position);
         holder.butler_item_text.setText(butlerResponse.getButler_item_text());
-//        Log.i(TAG, "图片URL地址为   Adapter：" + butlerResponse.getImageViewUrl());
+
         Glide.with(context).load(butlerResponse.getImageViewUrl()).into(holder.butler_item_image);
     }
 
     @Override
     public int getItemCount() {
-//        if (mButlerList != null) {
-//            Log.i("ceshi", "size=" + mButlerList.size());
-//        }
         return mButlerList != null && mButlerList.size() > 0 ? mButlerList.size() : 0;
     }
 

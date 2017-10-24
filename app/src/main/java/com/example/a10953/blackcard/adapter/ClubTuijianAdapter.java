@@ -1,7 +1,6 @@
 package com.example.a10953.blackcard.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
@@ -13,32 +12,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
-import com.example.a10953.blackcard.MyApplication;
 import com.example.a10953.blackcard.R;
 import com.example.a10953.blackcard.Util.RoundTransform;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.example.a10953.blackcard.R.id.viewPager;
+
 
 /**
  * Created by 10953 on 2017/10/16.
@@ -56,6 +46,7 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
     private String token;
     //访问网络的URL
     private String url = "http://api.qing-hei.com/index.php/Index/Api?type=newfind";
+    private int page = 1;
 
     private Context context;
 
@@ -269,25 +260,28 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
 
                 //添加具体数据
                 try {
+                    if(creamlist != null) {
+                        viewHolder.myflow_name.setText(creamlist.get(pos).getString("name"));
+                        viewHolder.content.setText(creamlist.get(pos).getString("content"));
+                        Glide.with(context)
+                                .load(creamlist.get(pos).getString("head"))
+                                .into(viewHolder.head);
+//                        Picasso.with(context)
+//                                .load(creamlist.get(pos).getString("head"))
+//                                .transform(new RoundTransform())
+//                                .into(viewHolder.head);
+                        Picasso.with(context)
+                                .load(creamlist.get(pos).getString("level_ico"))
+                                .into(viewHolder.levlevel_ico);
+                        viewHolder.praisenum.setText(creamlist.get(pos).getString("praisenum"));
 
-                    viewHolder.myflow_name.setText(creamlist.get(pos).getString("name"));
-                    viewHolder.content.setText(creamlist.get(pos).getString("content"));
-                    Picasso.with(context)
-                            .load(creamlist.get(pos).getString("head"))
-                            .transform(new RoundTransform())
-                            .into(viewHolder.head);
-                    Picasso.with(context)
-                            .load(creamlist.get(pos).getString("level_ico"))
-                            .into(viewHolder.levlevel_ico);
-                    viewHolder.praisenum.setText(creamlist.get(pos).getString("praisenum"));
-
-                    Pattern pattern = Pattern.compile("(http.+?\\.jpg)");
-                    Matcher matcher = pattern.matcher(creamlist.get(pos).getString("image_urls"));
-                    while(matcher.find()) {
-                        urlList.add(matcher.group());
+                        Pattern pattern = Pattern.compile("(http.+?\\.jpg)");
+                        Matcher matcher = pattern.matcher(creamlist.get(pos).getString("image_urls"));
+                        while (matcher.find()) {
+                            urlList.add(matcher.group());
+                        }
+                        scannum = urlList.size();
                     }
-                    scannum = urlList.size();
-
                     Log.i(TAG,"图片数量为" + scannum);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -304,79 +298,88 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                     Picasso.with(context)
                             .load(urlList.get(0))
                             .resize((width-80)/2, (width-80)/2)
+                            .centerCrop()
                             .into(viewHolder.image1);
 
                     Picasso.with(context)
                             .load(urlList.get(1))
                             .resize((width-80)/2, (width-80)/2)
+                            .centerCrop()
                             .into(viewHolder.image2);
                 }else if(scannum == 3){
                     Picasso.with(context)
                             .load(urlList.get(0))
                             .resize((width-90)/3, (width-90)/3)
+                            .centerCrop()
                             .into(viewHolder.image1);
 
                     Picasso.with(context)
                             .load(urlList.get(1))
                             .resize((width-90)/3, (width-90)/3)
+                            .centerCrop()
                             .into(viewHolder.image2);
 
                     Picasso.with(context)
                             .load(urlList.get(2))
                             .resize((width-90)/3, (width-90)/3)
+                            .centerCrop()
                             .into(viewHolder.image3);
                 }else if(scannum == 4){
                     Picasso.with(context)
                             .load(urlList.get(0))
                             .resize((width-80)/2, (width-80)/2)
+                            .centerCrop()
                             .into(viewHolder.image1);
 
                     Picasso.with(context)
                             .load(urlList.get(1))
                             .resize((width-80)/2, (width - 80)/2)
+                            .centerCrop()
                             .into(viewHolder.image2);
                     Picasso.with(context)
                             .load(urlList.get(2))
                             .resize((width-80)/2, (width-80)/2)
+                            .centerCrop()
                             .into(viewHolder.image4);
 
                     Picasso.with(context)
                             .load(urlList.get(3))
                             .resize((width-80)/2, (width - 80)/2)
+                            .centerCrop()
                             .into(viewHolder.image5);
                 }else if(scannum >= 5){
                     Picasso.with(context)
                             .load(urlList.get(0))
                             .resize((width-90)/3, (width-90)/3)
+                            .centerCrop()
                             .into(viewHolder.image1);
 
                     Picasso.with(context)
                             .load(urlList.get(1))
                             .resize((width-90)/3, (width-90)/3)
+                            .centerCrop()
                             .into(viewHolder.image2);
 
                     Picasso.with(context)
                             .load(urlList.get(2))
                             .resize((width-90)/3, (width-90)/3)
+                            .centerCrop()
                             .into(viewHolder.image3);
                     Picasso.with(context)
                             .load(urlList.get(3))
                             .resize((width-80)/2, (width-80)/2)
+                            .centerCrop()
                             .into(viewHolder.image4);
 
                     Picasso.with(context)
                             .load(urlList.get(4))
                             .resize((width-80)/2, (width - 80)/2)
+                            .centerCrop()
                             .into(viewHolder.image5);
 
                 }
                 urlList.clear();
 
-                if(position == getItemCount() - 1){
-                    //已经到达列表的底部,在这设置加载更多,自动加载
-                    Toast.makeText(context,"我是有底线的...",Toast.LENGTH_SHORT).show();
-
-                }
             }
 
         }

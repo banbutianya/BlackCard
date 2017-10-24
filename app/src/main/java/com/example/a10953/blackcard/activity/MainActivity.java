@@ -2,10 +2,7 @@ package com.example.a10953.blackcard.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,14 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.bumptech.glide.Glide;
-import com.example.a10953.blackcard.MyApplication;
 import com.example.a10953.blackcard.R;
+import com.example.a10953.blackcard.Listener.HttpCallBackListener;
+import com.example.a10953.blackcard.Util.HttpUtil;
 import com.example.a10953.blackcard.adapter.CarouselAdapter;
-import com.example.a10953.blackcard.adapter.WelFareAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,7 +55,7 @@ public class MainActivity extends AppCompatActivity{
         mApplyFor = (Button) findViewById(R.id.apply_for);
         mMembershipLogin = (Button) findViewById(R.id.membership_login);
 
-        new Thread(runnable).start();
+        httpPost();
 
         // 对ViewPager设置滑动监听
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -102,80 +96,75 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    //新线程进行网络请求
-    Runnable runnable = new Runnable(){
-        @Override
-        public void run() {
-            // TODO: http request,请求Butler数据
-            StringRequest stringRequestWelFare = new StringRequest(com.android.volley.Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    JSONObject object = null;
+    @Override
+    protected void onDestroy() {
+        //释放内存
+        super.onDestroy();
+    }
 
-                    //解析Json数据
-                    try {
-                        object = new JSONObject(response);
-                        JSONArray array = object.getJSONArray("data");
+    private void httpPost() {
+        HttpUtil.sendStringRequestByPost(url, null, new HttpCallBackListener() {
+            @Override
+            public void onSuccess(String response) {
+                JSONObject object = null;
 
-                        Log.i(TAG,"json数据" + response.toString() );
+                //解析Json数据
+                try {
+                    object = new JSONObject(response);
+                    JSONArray array = object.getJSONArray("data");
 
-                        ArrayList<JSONObject> datas = new ArrayList<JSONObject>();
-                        for (int i = 0; i < array.length(); i++) {
-                            datas.add(array.getJSONObject(i));
-                            Log.i(TAG,"请求的第几个数据" + i + array.getJSONObject(i));
-                        }
-                        arrayList = datas;
+                    Log.i(TAG,"json数据" + response.toString() );
 
-                        mapList = getUrlData();
-
-                        for(int j=0;j<mapList.size();j++){
-                            Log.i(TAG,"mapList中的数据为 ：" + mapList.get(j));
-                        }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    ArrayList<JSONObject> datas = new ArrayList<JSONObject>();
+                    for (int i = 0; i < array.length(); i++) {
+                        datas.add(array.getJSONObject(i));
+                        Log.i(TAG,"请求的第几个数据" + i + array.getJSONObject(i));
                     }
-                    CarouselAdapter carouselAdapter = new CarouselAdapter(context);
-                    carouselAdapter.setData(mapList);
-                    viewPager.setAdapter(carouselAdapter);
+                    arrayList = datas;
 
-                    Log.i(TAG,"mapList.size() = " + mapList.size());
+                    mapList = getUrlData();
 
-                    for (int i = 0; i < mapList.size(); i++) {
-                        // 制作底部小圆点
-                        ImageView pointImage = new ImageView(context);
-                        pointImage.setImageResource(R.drawable.shape_point_selector);
-                        // 设置小圆点的布局参数
-                        int PointSize = getResources().getDimensionPixelSize(R.dimen.point_size);
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(PointSize, PointSize);
-
-                        if (i > 0) {
-                            params.leftMargin = getResources().getDimensionPixelSize(R.dimen.point_margin);
-                            pointImage.setSelected(false);
-                        } else {
-                            pointImage.setSelected(true);
-                        }
-                        pointImage.setLayoutParams(params);
-                        // 添加到容器里
-                        pointGroup.addView(pointImage);
+                    for(int j=0;j<mapList.size();j++){
+                        Log.i(TAG,"mapList中的数据为 ：" + mapList.get(j));
                     }
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            }, new com.android.volley.Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.i(TAG, "post请求失败" + error.toString());
+                CarouselAdapter carouselAdapter = new CarouselAdapter(context);
+                carouselAdapter.setData(mapList);
+                viewPager.setAdapter(carouselAdapter);
+
+                Log.i(TAG,"mapList.size() = " + mapList.size());
+
+                for (int i = 0; i < mapList.size(); i++) {
+                    // 制作底部小圆点
+                    ImageView pointImage = new ImageView(context);
+                    pointImage.setImageResource(R.drawable.shape_point_selector);
+                    // 设置小圆点的布局参数
+                    int PointSize = getResources().getDimensionPixelSize(R.dimen.point_size);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(PointSize, PointSize);
+
+                    if (i > 0) {
+                        params.leftMargin = getResources().getDimensionPixelSize(R.dimen.point_margin);
+                        pointImage.setSelected(false);
+                    } else {
+                        pointImage.setSelected(true);
+                    }
+                    pointImage.setLayoutParams(params);
+                    // 添加到容器里
+                    pointGroup.addView(pointImage);
                 }
-            }){
+            }
+            @Override
+            public void onFail(VolleyError volleyError) {
+                Log.i(TAG, "post请求失败");
+            }
+        });
+    }
 
-            };
 
-            MyApplication.getHttpQueue().add(stringRequestWelFare);
-
-        }
-    };
-
-
+    //给ViewPager传递View和图片
     public List<Map<String, Object>> getUrlData() {
         List<Map<String, Object>> mdata = new ArrayList<Map<String, Object>>();
         JSONObject jsonObject = new JSONObject();
