@@ -113,7 +113,7 @@ public class ClubFragment_tuijian extends Fragment{
         refreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000);
+                refreshlayout.finishRefresh(1250);
                 Toast.makeText(context,"下拉刷新。。。",Toast.LENGTH_SHORT).show();
             }
         });

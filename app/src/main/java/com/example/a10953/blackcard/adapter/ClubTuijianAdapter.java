@@ -14,8 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.a10953.blackcard.R;
+import com.example.a10953.blackcard.Util.GlideCircleTransform;
 import com.example.a10953.blackcard.Util.RoundTransform;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 
 import org.json.JSONException;
@@ -265,6 +267,7 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                         viewHolder.content.setText(creamlist.get(pos).getString("content"));
                         Glide.with(context)
                                 .load(creamlist.get(pos).getString("head"))
+                                .transform(new GlideCircleTransform(context))
                                 .into(viewHolder.head);
 //                        Picasso.with(context)
 //                                .load(creamlist.get(pos).getString("head"))
