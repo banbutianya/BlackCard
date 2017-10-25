@@ -2,8 +2,10 @@ package com.example.a10953.blackcard.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.provider.ContactsContract;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -179,6 +181,9 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
         TextView content;
         TextView praisenum;
         ImageView levlevel_ico;
+        TextView location;
+        ImageView image6;
+        LinearLayout linearlayout_5;
 
         ImageView image1;
         ImageView image2;
@@ -193,6 +198,9 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
             content = (TextView) itemView.findViewById(R.id.content);
             praisenum = (TextView) itemView.findViewById(R.id.praisenum);
             levlevel_ico = (ImageView) itemView.findViewById(R.id.level_ico);
+            location = (TextView) itemView.findViewById(R.id.location);
+            image6 = (ImageView) itemView.findViewById(R.id.image6);
+            linearlayout_5 = (LinearLayout) itemView.findViewById(R.id.linearlayout_5);
 
             //ViewPage和PointGroup绑定对应的资源ID
             viewPager = (ViewPager) itemView.findViewById(R.id.head_viewpager);
@@ -215,7 +223,7 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
             if (holder instanceof ViewHolders) {
                 ViewHolders viewHolder = (ViewHolders) holder;
                 viewHolder.name.setText(name_text);
-                viewHolder.temperature.setText(temperature_text);
+                viewHolder.temperature.setText(temperature_text + "℃");
                 viewHolder.text.setText(text_text);
                 viewHolder.user_nick.setText(user_nick_text);
 
@@ -265,14 +273,21 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                     if(creamlist != null) {
                         viewHolder.myflow_name.setText(creamlist.get(pos).getString("name"));
                         viewHolder.content.setText(creamlist.get(pos).getString("content"));
+                        //viewHolder.location.setText(creamlist.get(pos).getString("location"));
+                        if(TextUtils.isEmpty(creamlist.get(pos).getString("location"))){
+                            viewHolder.location.setVisibility(View.GONE);
+                            viewHolder.image6.setVisibility(View.GONE);
+                        }else {
+                            viewHolder.location.setText(creamlist.get(pos).getString("location"));
+                        }
+
+
+                        Log.e(TAG,"content的数据为：" + creamlist.get(pos).getString("content"));
+                        //用Picasso会出错
                         Glide.with(context)
                                 .load(creamlist.get(pos).getString("head"))
                                 .transform(new GlideCircleTransform(context))
                                 .into(viewHolder.head);
-//                        Picasso.with(context)
-//                                .load(creamlist.get(pos).getString("head"))
-//                                .transform(new RoundTransform())
-//                                .into(viewHolder.head);
                         Picasso.with(context)
                                 .load(creamlist.get(pos).getString("level_ico"))
                                 .into(viewHolder.levlevel_ico);
@@ -284,6 +299,7 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                             urlList.add(matcher.group());
                         }
                         scannum = urlList.size();
+                        Log.e(TAG,"scannum 大小为：" + scannum);
                     }
                     Log.i(TAG,"图片数量为" + scannum);
                 } catch (JSONException e) {
@@ -292,92 +308,76 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                 if (scannum == 0) {
                     return;
                 }else if(scannum == 1){
-                    Glide.with(context)
+                    Picasso.with(context)
                             .load(urlList.get(0))
-                            .override(width,width)
-                            .centerCrop()
+                            .resize(width,width)
                             .into(viewHolder.image1);
-                }else if (scannum == 2){
+                }else if(scannum == 2){
                     Picasso.with(context)
                             .load(urlList.get(0))
                             .resize((width-80)/2, (width-80)/2)
-                            .centerCrop()
                             .into(viewHolder.image1);
-
                     Picasso.with(context)
                             .load(urlList.get(1))
                             .resize((width-80)/2, (width-80)/2)
-                            .centerCrop()
                             .into(viewHolder.image2);
                 }else if(scannum == 3){
                     Picasso.with(context)
                             .load(urlList.get(0))
                             .resize((width-90)/3, (width-90)/3)
-                            .centerCrop()
                             .into(viewHolder.image1);
 
                     Picasso.with(context)
                             .load(urlList.get(1))
                             .resize((width-90)/3, (width-90)/3)
-                            .centerCrop()
                             .into(viewHolder.image2);
 
                     Picasso.with(context)
                             .load(urlList.get(2))
                             .resize((width-90)/3, (width-90)/3)
-                            .centerCrop()
                             .into(viewHolder.image3);
                 }else if(scannum == 4){
                     Picasso.with(context)
                             .load(urlList.get(0))
                             .resize((width-80)/2, (width-80)/2)
-                            .centerCrop()
                             .into(viewHolder.image1);
 
                     Picasso.with(context)
                             .load(urlList.get(1))
                             .resize((width-80)/2, (width - 80)/2)
-                            .centerCrop()
                             .into(viewHolder.image2);
                     Picasso.with(context)
                             .load(urlList.get(2))
                             .resize((width-80)/2, (width-80)/2)
-                            .centerCrop()
                             .into(viewHolder.image4);
 
                     Picasso.with(context)
                             .load(urlList.get(3))
                             .resize((width-80)/2, (width - 80)/2)
-                            .centerCrop()
                             .into(viewHolder.image5);
                 }else if(scannum >= 5){
                     Picasso.with(context)
                             .load(urlList.get(0))
                             .resize((width-90)/3, (width-90)/3)
-                            .centerCrop()
                             .into(viewHolder.image1);
 
                     Picasso.with(context)
                             .load(urlList.get(1))
                             .resize((width-90)/3, (width-90)/3)
-                            .centerCrop()
                             .into(viewHolder.image2);
 
                     Picasso.with(context)
                             .load(urlList.get(2))
                             .resize((width-90)/3, (width-90)/3)
-                            .centerCrop()
                             .into(viewHolder.image3);
                     Picasso.with(context)
                             .load(urlList.get(3))
                             .resize((width-80)/2, (width-80)/2)
-                            .centerCrop()
                             .into(viewHolder.image4);
 
                     Picasso.with(context)
                             .load(urlList.get(4))
                             .resize((width-80)/2, (width - 80)/2)
-                            .centerCrop()
                             .into(viewHolder.image5);
 
                 }

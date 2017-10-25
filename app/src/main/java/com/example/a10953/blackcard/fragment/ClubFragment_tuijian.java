@@ -44,7 +44,7 @@ public class ClubFragment_tuijian extends Fragment{
     //访问网络的URL
     private String url = "http://api.qing-hei.com/index.php/Index/Api?type=newfind";
     //设置分页
-    private int page = 1;
+    private int page;
 
     //登录ID
     private String uid;
@@ -85,6 +85,7 @@ public class ClubFragment_tuijian extends Fragment{
         Intent intent = getActivity().getIntent();
         uid = intent.getStringExtra("uid");
         token = intent.getStringExtra("token");
+        page = 1;
 
         //获取context
         this.context = getActivity();
@@ -115,6 +116,7 @@ public class ClubFragment_tuijian extends Fragment{
             public void onRefresh(RefreshLayout refreshlayout) {
                 refreshlayout.finishRefresh(1250);
                 Toast.makeText(context,"下拉刷新。。。",Toast.LENGTH_SHORT).show();
+                page = 1;
             }
         });
         refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
@@ -122,6 +124,7 @@ public class ClubFragment_tuijian extends Fragment{
             public void onLoadmore(RefreshLayout refreshlayout) {
                 refreshlayout.finishLoadmore(2000);
                 loadMoreData(page + 1,clubTuijianAdapter);
+                Log.e(TAG,"page为：" + page);
                 page++;
             }
         });
@@ -203,12 +206,14 @@ public class ClubFragment_tuijian extends Fragment{
 
                     JSONObject myinfo = data.getJSONObject("myinfo");
                     headArray.add(myinfo);
+                    Log.e(TAG,"headArray大小为：" + headArray.size());
                     JSONObject weather = data.getJSONObject("weather");
                     JSONArray results = weather.getJSONArray("results");
                     ArrayList<JSONObject> headArrayCopy = new ArrayList<>();
                     for(int i = 0; i < results.length(); i++){
                         headArrayCopy.add(results.getJSONObject(i));
                         headArray.add(headArrayCopy.get(i));
+                        Log.e(TAG,"headArray大小为：" + headArray.size());
                     }
 
                     //初始化topilist，并将datas赋给topiclist。（应该可以不用datas，直接将topiclist赋值，一会试一下）

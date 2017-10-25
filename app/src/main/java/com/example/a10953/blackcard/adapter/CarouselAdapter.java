@@ -11,6 +11,8 @@ import android.widget.ImageView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.bumptech.glide.Glide;
+import com.example.a10953.blackcard.R;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,9 +55,9 @@ public class CarouselAdapter extends PagerAdapter{
         imageView = (ImageView)mapList.get(position).get("view");
         //设置图片显示方式
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        //Glide加载图片
-        Glide.with(context)
-                .load(mapList.get(position).get("url"))
+        //Picasso加载图片
+        Picasso.with(context)
+                .load((String) mapList.get(position).get("url"))
                 .into(imageView);
         //将动态产生的View添加到排版View中，添加ImageView,
         container.addView(imageView);
