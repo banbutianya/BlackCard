@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.a10953.blackcard.R;
 import com.example.a10953.blackcard.fragment.CardFragment;
 import com.example.a10953.blackcard.fragment.ClubFragment;
+import com.example.a10953.blackcard.fragment.ClubFragment_zhuye;
 import com.example.a10953.blackcard.fragment.EnjoyFragment;
 import com.example.a10953.blackcard.fragment.MineFragment;
 import com.example.a10953.blackcard.fragment.StewardsFragment;
@@ -43,7 +44,7 @@ public class HomeActivity extends FragmentActivity{
 
         fragmentArrayList.add(CardFragment.class);
         fragmentArrayList.add(ClubFragment.class);
-        fragmentArrayList.add(StewardsFragment.class);
+        fragmentArrayList.add(ClubFragment_zhuye.class);
         fragmentArrayList.add(EnjoyFragment.class);
         fragmentArrayList.add(MineFragment.class);
 

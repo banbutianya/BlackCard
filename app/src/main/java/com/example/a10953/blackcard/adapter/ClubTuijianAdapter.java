@@ -2,7 +2,6 @@ package com.example.a10953.blackcard.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.provider.ContactsContract;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -17,9 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.a10953.blackcard.R;
 import com.example.a10953.blackcard.Util.GlideCircleTransform;
-import com.example.a10953.blackcard.Util.RoundTransform;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 
 import org.json.JSONException;
@@ -86,6 +83,7 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
 
     public void setHeaderView(View headerView) {
         mHeaderView = headerView;
+        //notifyItemInserted(int position);列表position位置添加一条数据时可以调用，有动画效果？？？
         notifyItemInserted(0);
     }
 
@@ -184,6 +182,7 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
         TextView location;
         ImageView image6;
         LinearLayout linearlayout_5;
+        TextView scannumtext;
 
         ImageView image1;
         ImageView image2;
@@ -201,6 +200,7 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
             location = (TextView) itemView.findViewById(R.id.location);
             image6 = (ImageView) itemView.findViewById(R.id.image6);
             linearlayout_5 = (LinearLayout) itemView.findViewById(R.id.linearlayout_5);
+            scannumtext = (TextView) itemView.findViewById(R.id.scannumtext);
 
             //ViewPage和PointGroup绑定对应的资源ID
             viewPager = (ViewPager) itemView.findViewById(R.id.head_viewpager);
@@ -217,7 +217,6 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
 
         if(getItemViewType(position) == TYPE_HEADER){
             if (holder instanceof ViewHolders) {
@@ -273,7 +272,8 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                     if(creamlist != null) {
                         viewHolder.myflow_name.setText(creamlist.get(pos).getString("name"));
                         viewHolder.content.setText(creamlist.get(pos).getString("content"));
-                        //viewHolder.location.setText(creamlist.get(pos).getString("location"));
+
+                        //判断地点为空不为空，为空的话继续隐藏，不为空的话显示图片和位置
                         if(TextUtils.isEmpty(creamlist.get(pos).getString("location"))){
                             viewHolder.location.setVisibility(View.GONE);
                             viewHolder.image6.setVisibility(View.GONE);
@@ -281,6 +281,7 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                             viewHolder.location.setText(creamlist.get(pos).getString("location"));
                         }
 
+                        Log.e(TAG,"用户名为：" + creamlist.get(pos).getString("name"));
 
                         Log.e(TAG,"content的数据为：" + creamlist.get(pos).getString("content"));
                         //用Picasso会出错
@@ -301,87 +302,159 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                         scannum = urlList.size();
                         Log.e(TAG,"scannum 大小为：" + scannum);
                     }
-                    Log.i(TAG,"图片数量为" + scannum);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 if (scannum == 0) {
-                    return;
+                    viewHolder.image1.setVisibility(View.GONE);
+                    viewHolder.image2.setVisibility(View.GONE);
+                    viewHolder.image3.setVisibility(View.GONE);
+                    viewHolder.image4.setVisibility(View.GONE);
+                    viewHolder.image5.setVisibility(View.GONE);
+                    viewHolder.scannumtext.setVisibility(View.GONE);
                 }else if(scannum == 1){
+                    viewHolder.image1.setVisibility(View.VISIBLE);
+                    viewHolder.image2.setVisibility(View.GONE);
+                    viewHolder.image3.setVisibility(View.GONE);
+                    viewHolder.image4.setVisibility(View.GONE);
+                    viewHolder.image5.setVisibility(View.GONE);
+                    viewHolder.scannumtext.setVisibility(View.GONE);
+
                     Picasso.with(context)
                             .load(urlList.get(0))
-                            .resize(width,width)
+                            .centerCrop()
+                            .resize(width, width)
                             .into(viewHolder.image1);
+                    Log.e(TAG,"图片的URL为：" + urlList.get(0));
+
+                    urlList.clear();
                 }else if(scannum == 2){
+                    viewHolder.image1.setVisibility(View.VISIBLE);
+                    viewHolder.image2.setVisibility(View.VISIBLE);
+                    viewHolder.image3.setVisibility(View.GONE);
+                    viewHolder.image4.setVisibility(View.GONE);
+                    viewHolder.image5.setVisibility(View.GONE);
+                    viewHolder.scannumtext.setVisibility(View.GONE);
+
                     Picasso.with(context)
                             .load(urlList.get(0))
-                            .resize((width-80)/2, (width-80)/2)
+                            .centerCrop()
+                            .resize((width - 80) / 2, (width - 80) / 2)
                             .into(viewHolder.image1);
                     Picasso.with(context)
                             .load(urlList.get(1))
-                            .resize((width-80)/2, (width-80)/2)
+                            .centerCrop()
+                            .resize((width - 80) / 2, (width - 80) / 2)
                             .into(viewHolder.image2);
+                    Log.e(TAG,"图片的URL为：" + urlList.get(0));
+                    Log.e(TAG,"图片的URL为：" + urlList.get(1));
+
+                    urlList.clear();
                 }else if(scannum == 3){
+                    viewHolder.image1.setVisibility(View.VISIBLE);
+                    viewHolder.image2.setVisibility(View.VISIBLE);
+                    viewHolder.image3.setVisibility(View.VISIBLE);
+                    viewHolder.image4.setVisibility(View.GONE);
+                    viewHolder.image5.setVisibility(View.GONE);
+                    viewHolder.scannumtext.setVisibility(View.GONE);
                     Picasso.with(context)
                             .load(urlList.get(0))
-                            .resize((width-90)/3, (width-90)/3)
+                            .centerCrop()
+                            .resize((width - 90) / 3, (width - 90) / 3)
                             .into(viewHolder.image1);
-
                     Picasso.with(context)
                             .load(urlList.get(1))
-                            .resize((width-90)/3, (width-90)/3)
+                            .centerCrop()
+                            .resize((width - 90) / 3, (width - 90) / 3)
                             .into(viewHolder.image2);
-
                     Picasso.with(context)
                             .load(urlList.get(2))
-                            .resize((width-90)/3, (width-90)/3)
+                            .centerCrop()
+                            .resize((width - 90) / 3, (width - 90) / 3)
                             .into(viewHolder.image3);
+                    Log.e(TAG,"图片的URL为：" + urlList.get(0));
+                    Log.e(TAG,"图片的URL为：" + urlList.get(1));
+                    Log.e(TAG,"图片的URL为：" + urlList.get(2));
+
+                    urlList.clear();
                 }else if(scannum == 4){
-                    Picasso.with(context)
-                            .load(urlList.get(0))
-                            .resize((width-80)/2, (width-80)/2)
-                            .into(viewHolder.image1);
+                    viewHolder.image1.setVisibility(View.VISIBLE);
+                    viewHolder.image2.setVisibility(View.VISIBLE);
+                    viewHolder.image3.setVisibility(View.VISIBLE);
+                    viewHolder.image4.setVisibility(View.VISIBLE);
+                    viewHolder.image5.setVisibility(View.GONE);
+                    viewHolder.scannumtext.setVisibility(View.GONE);
 
                     Picasso.with(context)
+                            .load(urlList.get(0))
+                            .centerCrop()
+                            .resize((width - 80) / 2, (width - 80) / 2)
+                            .into(viewHolder.image1);
+                    Picasso.with(context)
                             .load(urlList.get(1))
-                            .resize((width-80)/2, (width - 80)/2)
+                            .centerCrop()
+                            .resize((width - 80) / 2, (width - 80) / 2)
                             .into(viewHolder.image2);
                     Picasso.with(context)
                             .load(urlList.get(2))
-                            .resize((width-80)/2, (width-80)/2)
+                            .centerCrop()
+                            .resize((width - 80) / 2, (width - 80) / 2)
                             .into(viewHolder.image4);
-
                     Picasso.with(context)
                             .load(urlList.get(3))
-                            .resize((width-80)/2, (width - 80)/2)
+                            .centerCrop()
+                            .resize((width - 80) / 2, (width - 80) / 2)
                             .into(viewHolder.image5);
+                    Log.e(TAG,"图片的URL为：" + urlList.get(0));
+                    Log.e(TAG,"图片的URL为：" + urlList.get(1));
+                    Log.e(TAG,"图片的URL为：" + urlList.get(2));
+                    Log.e(TAG,"图片的URL为：" + urlList.get(3));
+
+                    urlList.clear();
                 }else if(scannum >= 5){
+                    viewHolder.image1.setVisibility(View.VISIBLE);
+                    viewHolder.image2.setVisibility(View.VISIBLE);
+                    viewHolder.image3.setVisibility(View.VISIBLE);
+                    viewHolder.image4.setVisibility(View.VISIBLE);
+                    viewHolder.image5.setVisibility(View.VISIBLE);
+                    viewHolder.scannumtext.setVisibility(View.VISIBLE);
+
+                    viewHolder.scannumtext.setText(scannum + "张图");
+
                     Picasso.with(context)
                             .load(urlList.get(0))
-                            .resize((width-90)/3, (width-90)/3)
+                            .centerCrop()
+                            .resize((width - 90) / 3, (width - 90) / 3)
                             .into(viewHolder.image1);
-
                     Picasso.with(context)
                             .load(urlList.get(1))
-                            .resize((width-90)/3, (width-90)/3)
+                            .centerCrop()
+                            .resize((width - 90) / 3, (width - 90) / 3)
                             .into(viewHolder.image2);
-
                     Picasso.with(context)
                             .load(urlList.get(2))
-                            .resize((width-90)/3, (width-90)/3)
+                            .centerCrop()
+                            .resize((width - 90) / 3, (width - 90) / 3)
                             .into(viewHolder.image3);
                     Picasso.with(context)
                             .load(urlList.get(3))
-                            .resize((width-80)/2, (width-80)/2)
+                            .centerCrop()
+                            .resize((width - 80) / 2, (width - 80) / 2)
                             .into(viewHolder.image4);
-
                     Picasso.with(context)
                             .load(urlList.get(4))
-                            .resize((width-80)/2, (width - 80)/2)
+                            .centerCrop()
+                            .resize((width - 80) / 2, (width - 80) / 2)
                             .into(viewHolder.image5);
+                    Log.e(TAG,"图片的URL为：" + urlList.get(0));
+                    Log.e(TAG,"图片的URL为：" + urlList.get(1));
+                    Log.e(TAG,"图片的URL为：" + urlList.get(2));
+                    Log.e(TAG,"图片的URL为：" + urlList.get(3));
+                    Log.e(TAG,"图片的URL为：" + urlList.get(4));
 
+                    urlList.clear();
                 }
-                urlList.clear();
 
             }
 

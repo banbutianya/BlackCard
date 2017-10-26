@@ -2,12 +2,10 @@ package com.example.a10953.blackcard.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.example.a10953.blackcard.Listener.EndLessOnScrollListener;
 import com.example.a10953.blackcard.R;
 import com.example.a10953.blackcard.Listener.HttpCallBackListener;
 import com.example.a10953.blackcard.Util.HttpUtil;
@@ -29,7 +26,6 @@ import com.example.a10953.blackcard.adapter.ClubTuijianAdapter;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -115,8 +111,9 @@ public class ClubFragment_tuijian extends Fragment{
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 refreshlayout.finishRefresh(1250);
-                Toast.makeText(context,"下拉刷新。。。",Toast.LENGTH_SHORT).show();
-                page = 1;
+//                page = 1;
+//                tuijianPost();
+
             }
         });
         refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
@@ -278,7 +275,6 @@ public class ClubFragment_tuijian extends Fragment{
                     // 添加到容器里
                     pointGroup.addView(pointImage);
                 }
-
             }
 
             @Override
@@ -288,7 +284,7 @@ public class ClubFragment_tuijian extends Fragment{
         });
     }
 
-    public void loadMoreData(int nowpage,final ClubTuijianAdapter clubTuijianAdapter){
+    public void loadMoreData(final int nowpage, final ClubTuijianAdapter clubTuijianAdapter){
         final HashMap<String, String> map = new HashMap<>();
         map.put("uid", uid);
         map.put("token", token);
@@ -312,10 +308,10 @@ public class ClubFragment_tuijian extends Fragment{
                         for (int i = 0; i < cream.length(); i++) {
                             datasss.add(cream.getJSONObject(i));
                             Log.e(TAG, "datasss的大小为：" + datasss.size());
+                            creamlist.add(datasss.get(i));
                         }
-
-                        creamlist.addAll(datasss);
-                        cream = null;
+//                        creamlist.addAll(datasss);
+//                        cream = null;
                         datasss.clear();
                     }
                     Log.e(TAG,"creamlist的大小为：" + creamlist.size());
@@ -325,7 +321,6 @@ public class ClubFragment_tuijian extends Fragment{
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFail(VolleyError volleyError) {
                 Log.i(TAG, "post请求失败" + volleyError.toString());

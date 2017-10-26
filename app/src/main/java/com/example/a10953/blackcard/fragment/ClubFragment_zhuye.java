@@ -14,46 +14,39 @@ import android.view.ViewGroup;
 import com.example.a10953.blackcard.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by 10953 on 2017/10/10.
+ * Created by 10953 on 2017/10/26.
  */
 
-public class ClubFragment extends Fragment{
+public class ClubFragment_zhuye extends Fragment{
 
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private TabLayout zhuye_tablayout;
+    private ViewPager zhuye_viewPager;
     private ArrayList<String> mTitles;
     private ArrayList<Fragment> fragmentList;
     private MyAdapter adapter;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         mTitles = new ArrayList<>();
-        mTitles.add("推荐");
-        mTitles.add("关注");
+        mTitles.add("动态");
+        mTitles.add("资料");
 
         fragmentList = new ArrayList<>();
         fragmentList.add(new ClubFragment_tuijian());
-        fragmentList.add(new ClubFragment_guanzhu());
+        fragmentList.add(new ClubFragment_zhuye_ziliao());
 
-        View view = inflater.inflate(R.layout.fragment_black_club, container,false);
-        tabLayout = (TabLayout)view.findViewById(R.id.tabLayout);
-        viewPager = (ViewPager)view.findViewById(R.id.viewPager);
+        View view = inflater.inflate(R.layout.fragment_black_club_fragment_zhuye, container, false);
+        zhuye_tablayout = (TabLayout) view.findViewById(R.id.zhuye_tablayout);
+        zhuye_viewPager = (ViewPager) view.findViewById(R.id.zhuye_viewPager);
 
-        //ViewPager的适配器
-        /**
-         *  getFragmentManager()是所在fragment 父容器的碎片管理，
-         *  getChildFragmentManager()是在fragment 里面子容器的碎片管理。
-         */
-        //adapter = new MyAdapter(getFragmentManager());
         adapter = new MyAdapter(getChildFragmentManager());
-        viewPager.setAdapter(adapter);
+        zhuye_viewPager.setAdapter(adapter);
         //绑定
-        tabLayout.setupWithViewPager(viewPager);
+        zhuye_tablayout.setupWithViewPager(zhuye_viewPager);
 
         return view;
     }
@@ -63,7 +56,7 @@ public class ClubFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
     }
 
-    class MyAdapter extends FragmentPagerAdapter{
+    class MyAdapter extends FragmentPagerAdapter {
 
         public MyAdapter(FragmentManager fm) {
             super(fm);
@@ -84,4 +77,7 @@ public class ClubFragment extends Fragment{
             return mTitles.get(position);
         }
     }
+
+
+
 }

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/zhuye_tablayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_alignParentBottom="true">
+                </android.support.design.widget.TabLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="#CCCCCC"
+                    android:layout_above="@id/zhuye_tablayout"
+                    app:layout_scrollFlags="scroll"/>
+
+                <ImageView
+                    android:id="@+id/allback"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/allback"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="8dp"
+                    app:layout_scrollFlags="scroll"/>
+
+                <ImageView
+                    android:id="@+id/image_touxiang"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_launcher"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignTop="@id/allback"
+                    app:layout_scrollFlags="scroll"/>
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/image_touxiang"
+                    android:layout_centerHorizontal="true"
+                    app:layout_scrollFlags="scroll">
+                    <TextView
+                        android:id="@+id/yonghuming"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="羽诺夕"
+                        android:textSize="18sp"
+                        android:layout_below="@id/image_touxiang"
+                        app:layout_scrollFlags="scroll"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/nv"
+                        android:layout_gravity="center"
+                        app:layout_scrollFlags="scroll"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ta很懒哦，什么都没有写..."
+                    android:textSize="12sp"
+                    android:layout_below="@id/linearlayout_1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    app:layout_scrollFlags="scroll"/>
+
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:orientation="horizontal"
+                    android:layout_above="@id/zhuye_tablayout"
+                    app:layout_scrollFlags="scroll">
+
+                    <LinearLayout
+                        android:id="@+id/linearlayout_3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        app:layout_scrollFlags="scroll">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="粉丝"
+                            android:layout_gravity="center"
+                            app:layout_scrollFlags="scroll"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="32"
+                            android:layout_gravity="center"
+                            app:layout_scrollFlags="scroll"/>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearlayout_4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        app:layout_scrollFlags="scroll">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="关注"
+                            android:layout_gravity="center"
+                            app:layout_scrollFlags="scroll"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:layout_gravity="center"
+                            app:layout_scrollFlags="scroll"/>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearlayout_5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        app:layout_scrollFlags="scroll">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="发布"
+                            android:layout_gravity="center"
+                            app:layout_scrollFlags="scroll"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="8"
+                            android:layout_gravity="center"
+                            app:layout_scrollFlags="scroll"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/zhuye_viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v4.view.ViewPager>
+        </RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_6"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        android:background="#FF9999"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:id="@+id/linearlayout_7"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:src="@drawable/iv_jiaguanzhu"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="添加关注"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_8"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:src="@drawable/jubao"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="举报"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

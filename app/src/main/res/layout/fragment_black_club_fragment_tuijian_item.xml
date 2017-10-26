@@ -55,8 +55,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/relativeLayout_1"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:orientation="vertical">
 
         <TextView
@@ -116,7 +116,10 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="4dp"
                 android:scaleType="centerCrop"/>
+
+            
         </LinearLayout>
+        
 
         <LinearLayout
             android:id="@+id/linearlayout_5"
@@ -142,6 +145,17 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/scannumtext"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:text="5张图"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:background="#CCCCCC"
+        android:layout_alignBottom="@id/linearlayout_1"
+        android:layout_alignRight="@id/linearlayout_1"
+        android:layout_marginBottom="5dp"/>
 
     <View
         android:id="@+id/view_1"
@@ -150,7 +164,6 @@
         android:background="#CCCCCC"
         android:layout_below="@id/linearlayout_1"
         android:layout_marginTop="8dp"/>
-
 
 
     <LinearLayout
