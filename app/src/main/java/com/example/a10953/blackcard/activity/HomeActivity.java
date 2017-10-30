@@ -44,7 +44,7 @@ public class HomeActivity extends FragmentActivity{
 
         fragmentArrayList.add(CardFragment.class);
         fragmentArrayList.add(ClubFragment.class);
-        fragmentArrayList.add(ClubFragment_zhuye.class);
+        fragmentArrayList.add(StewardsFragment.class);
         fragmentArrayList.add(EnjoyFragment.class);
         fragmentArrayList.add(MineFragment.class);
 
@@ -73,7 +73,6 @@ public class HomeActivity extends FragmentActivity{
         tabhost.setup(this, getSupportFragmentManager(), R.id.container_fragment);
 
         //得到fragment的个数
-        //int count = fragmentArrayList.size();
         int count = fragmentArrayList != null && fragmentArrayList.size() > 0 ? fragmentArrayList.size() : 0;
 
         for (int i = 0; i < count; i++) {

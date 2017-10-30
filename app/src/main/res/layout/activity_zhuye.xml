@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -21,7 +21,8 @@
                 android:id="@+id/app_bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="#CCCCCC" />
+                android:src="#CCCCCC"
+                android:scaleType="centerCrop"/>
 
             <ImageView
                 android:id="@+id/allback"
@@ -52,6 +53,7 @@
                     android:layout_height="wrap_content"
                     android:text="羽诺夕"
                     android:textSize="18sp"
+                    android:textColor="#FFFFFF"
                     android:layout_below="@id/user_upimg" />
 
                 <ImageView
@@ -63,11 +65,12 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/introinfo"
+                android:id="@+id/certification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ta很懒哦，什么都没有写..."
                 android:textSize="12sp"
+                android:textColor="#FFFFFF"
                 android:layout_below="@id/linearlayout_1"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="3dp" />
@@ -78,6 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:orientation="horizontal"
+                android:background="#aa000000"
                 android:layout_alignParentBottom="true">
 
                 <LinearLayout
@@ -90,12 +94,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="粉丝"
+                        android:textColor="#FFFFFF"
                         android:layout_gravity="center" />
                     <TextView
                         android:id="@+id/fans"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="32"
+                        android:textColor="#FFFFFF"
                         android:layout_gravity="center" />
                 </LinearLayout>
 
@@ -110,12 +116,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="关注"
+                        android:textColor="#FFFFFF"
                         android:layout_gravity="center" />
                     <TextView
                         android:id="@+id/follow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
+                        android:textColor="#FFFFFF"
                         android:layout_gravity="center" />
                 </LinearLayout>
 
@@ -130,12 +138,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="发布"
+                        android:textColor="#FFFFFF"
                         android:layout_gravity="center" />
                     <TextView
-                        android:id="@+id/isfollow"
+                        android:id="@+id/findlist_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="8"
+                        android:textColor="#FFFFFF"
                         android:layout_gravity="center" />
                 </LinearLayout>
 
@@ -146,7 +156,7 @@
             android:id="@+id/zhuye_tablayout"
             android:layout_width="match_parent"
             android:layout_height="38dp"
-            android:background="#FFFFCC"
+            android:background="#FFFFFF"
             android:layout_alignParentBottom="true">
         </android.support.design.widget.TabLayout>
 

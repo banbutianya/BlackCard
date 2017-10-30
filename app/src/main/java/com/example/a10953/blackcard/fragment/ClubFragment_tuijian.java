@@ -111,8 +111,6 @@ public class ClubFragment_tuijian extends Fragment{
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 refreshlayout.finishRefresh(1250);
-//                page = 1;
-//                tuijianPost();
 
             }
         });

@@ -307,6 +307,7 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                     e.printStackTrace();
                 }
                 if (scannum == 0) {
+                    //全都隐藏
                     viewHolder.image1.setVisibility(View.GONE);
                     viewHolder.image2.setVisibility(View.GONE);
                     viewHolder.image3.setVisibility(View.GONE);
@@ -315,10 +316,12 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                     viewHolder.scannumtext.setVisibility(View.GONE);
                 }else if(scannum == 1){
                     viewHolder.image1.setVisibility(View.VISIBLE);
+                    //隐藏图片
                     viewHolder.image2.setVisibility(View.GONE);
                     viewHolder.image3.setVisibility(View.GONE);
                     viewHolder.image4.setVisibility(View.GONE);
                     viewHolder.image5.setVisibility(View.GONE);
+                    //隐藏图片总数
                     viewHolder.scannumtext.setVisibility(View.GONE);
 
                     Picasso.with(context)
@@ -332,9 +335,11 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                 }else if(scannum == 2){
                     viewHolder.image1.setVisibility(View.VISIBLE);
                     viewHolder.image2.setVisibility(View.VISIBLE);
+                    //隐藏图片
                     viewHolder.image3.setVisibility(View.GONE);
                     viewHolder.image4.setVisibility(View.GONE);
                     viewHolder.image5.setVisibility(View.GONE);
+                    //隐藏图片总数
                     viewHolder.scannumtext.setVisibility(View.GONE);
 
                     Picasso.with(context)
@@ -355,8 +360,10 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                     viewHolder.image1.setVisibility(View.VISIBLE);
                     viewHolder.image2.setVisibility(View.VISIBLE);
                     viewHolder.image3.setVisibility(View.VISIBLE);
+                    //隐藏图片
                     viewHolder.image4.setVisibility(View.GONE);
                     viewHolder.image5.setVisibility(View.GONE);
+                    //隐藏图片总数
                     viewHolder.scannumtext.setVisibility(View.GONE);
                     Picasso.with(context)
                             .load(urlList.get(0))
@@ -383,7 +390,10 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                     viewHolder.image2.setVisibility(View.VISIBLE);
                     viewHolder.image3.setVisibility(View.VISIBLE);
                     viewHolder.image4.setVisibility(View.VISIBLE);
+
+                    //第五张图片隐藏
                     viewHolder.image5.setVisibility(View.GONE);
+                    //图片总数隐藏
                     viewHolder.scannumtext.setVisibility(View.GONE);
 
                     Picasso.with(context)

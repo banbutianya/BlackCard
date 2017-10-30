@@ -3,50 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:text="这是动态页面"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:text="这是动态页面"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:text="这是动态页面"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:text="这是动态页面"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:text="这是动态页面"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:text="这是动态页面"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:text="这是动态页面"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:text="这是动态页面"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:text="这是动态页面"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:text="这是动态页面"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:text="这是动态页面"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_dongtai"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+</android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
