@@ -5,237 +5,235 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="228dp">
-
-        <RelativeLayout
-            android:id="@+id/relativeLayout_1"
+        android:layout_height="match_parent">
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="190dp"
-            app:layout_scrollFlags="scroll">
+            android:layout_height="228dp">
 
-            <ImageView
-                android:id="@+id/app_bg"
+            <RelativeLayout
+                android:id="@+id/relativeLayout_1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="#CCCCCC" />
-
-            <ImageView
-                android:id="@+id/allback"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/allback"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="8dp" />
-
-            <ImageView
-                android:id="@+id/user_upimg"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_launcher"
-                android:layout_centerHorizontal="true"
-                android:layout_alignTop="@id/allback" />
-
-            <LinearLayout
-                android:id="@+id/linearlayout_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@id/user_upimg"
-                android:layout_centerHorizontal="true">
-                <TextView
-                    android:id="@+id/user_nick"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="羽诺夕"
-                    android:textSize="18sp"
-                    android:layout_below="@id/user_upimg" />
+                android:layout_height="190dp"
+                app:layout_scrollFlags="scroll">
 
                 <ImageView
-                    android:id="@+id/usersexicon"
+                    android:id="@+id/app_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="#CCCCCC" />
+
+                <ImageView
+                    android:id="@+id/allback"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/nv"
-                    android:layout_gravity="center" />
-            </LinearLayout>
+                    android:src="@drawable/allback"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="8dp" />
 
-            <TextView
-                android:id="@+id/introinfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ta很懒哦，什么都没有写..."
-                android:textSize="12sp"
-                android:layout_below="@id/linearlayout_1"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="3dp" />
+                <ImageView
+                    android:id="@+id/user_upimg"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_launcher"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignTop="@id/allback" />
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/user_upimg"
+                    android:layout_centerHorizontal="true">
+                    <TextView
+                        android:id="@+id/user_nick"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="羽诺夕"
+                        android:textSize="18sp"
+                        android:layout_below="@id/user_upimg" />
+
+                    <ImageView
+                        android:id="@+id/usersexicon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/nv"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/introinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ta很懒哦，什么都没有写..."
+                    android:textSize="12sp"
+                    android:layout_below="@id/linearlayout_1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp" />
 
 
-            <LinearLayout
-                android:id="@+id/linearlayout_2"
+                <LinearLayout
+                    android:id="@+id/linearlayout_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:orientation="horizontal"
+                    android:layout_alignParentBottom="true">
+
+                    <LinearLayout
+                        android:id="@+id/linearlayout_3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="粉丝"
+                            android:layout_gravity="center" />
+                        <TextView
+                            android:id="@+id/fans"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="32"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearlayout_4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="关注"
+                            android:layout_gravity="center" />
+                        <TextView
+                            android:id="@+id/follow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearlayout_5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="发布"
+                            android:layout_gravity="center" />
+                        <TextView
+                            android:id="@+id/isfollow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="8"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/zhuye_tablayout"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
-                android:orientation="horizontal"
+                android:background="#FFFFCC"
                 android:layout_alignParentBottom="true">
+            </android.support.design.widget.TabLayout>
 
-                <LinearLayout
-                    android:id="@+id/linearlayout_3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="粉丝"
-                        android:layout_gravity="center" />
-                    <TextView
-                        android:id="@+id/fans"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="32"
-                        android:layout_gravity="center" />
-                </LinearLayout>
+        </android.support.design.widget.AppBarLayout>
 
-
-                <LinearLayout
-                    android:id="@+id/linearlayout_4"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="关注"
-                        android:layout_gravity="center" />
-                    <TextView
-                        android:id="@+id/follow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:layout_gravity="center" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/linearlayout_5"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="发布"
-                        android:layout_gravity="center" />
-                    <TextView
-                        android:id="@+id/isfollow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="8"
-                        android:layout_gravity="center" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </RelativeLayout>
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/zhuye_tablayout"
+        <LinearLayout
+            android:id="@+id/linearlayout_6"
             android:layout_width="match_parent"
             android:layout_height="38dp"
-            android:background="#FFFFCC"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
             android:layout_alignParentBottom="true">
-        </android.support.design.widget.TabLayout>
 
-    </android.support.design.widget.AppBarLayout>
+            <LinearLayout
+                android:id="@+id/linearlayout_7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:src="@drawable/iv_jiaguanzhu"
+                    android:layout_gravity="center"/>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/zhuye_viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </android.support.v4.view.ViewPager>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="添加关注"
+                    android:textSize="12sp"/>
 
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="39dp"
-        android:orientation="vertical"
-        android:layout_gravity="bottom">
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="#CCCCCC"/>
+
+            <LinearLayout
+                android:id="@+id/linearlayout_8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:src="@drawable/jubao"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="举报"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="#CCCCCC"
-            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="39dp"
             />
 
-    </LinearLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/zhuye_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appbar"
+            android:layout_above="@id/linearlayout_6"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        </android.support.v4.view.ViewPager>
 
 
-    <LinearLayout
-        android:id="@+id/linearlayout_6"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom"
-        android:background="#FFFFFFFF">
 
-        <LinearLayout
-            android:id="@+id/linearlayout_7"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="22dp"
-                android:src="@drawable/iv_jiaguanzhu"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="添加关注"
-                android:textSize="12sp"/>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:background="#CCCCCC"/>
-
-        <LinearLayout
-            android:id="@+id/linearlayout_8"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="22dp"
-                android:src="@drawable/jubao"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="举报"
-                android:textSize="12sp"/>
-
-        </LinearLayout>
-    </LinearLayout>
-
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

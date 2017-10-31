@@ -1,6 +1,7 @@
 package com.example.a10953.blackcard.activity;
 
 import android.content.Intent;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -20,6 +23,7 @@ import com.example.a10953.blackcard.R;
 import com.example.a10953.blackcard.Util.GlideCircleTransform;
 import com.example.a10953.blackcard.Util.HttpUtil;
 import com.example.a10953.blackcard.fragment.ClubFragment_tuijian;
+import com.example.a10953.blackcard.fragment.ClubFragment_zhuye_dongtai;
 import com.example.a10953.blackcard.fragment.ClubFragment_zhuye_ziliao;
 import com.squareup.picasso.Picasso;
 
@@ -74,6 +78,8 @@ public class ZhuyeActivity extends AppCompatActivity {
     //发布
     private TextView findlist_size;
 
+    private JSONArray find_copy;
+    private AppBarLayout appbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +96,7 @@ public class ZhuyeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         uid = intent.getStringExtra("uid");
         token = intent.getStringExtra("token");
-        user_uid = "138901";
+        user_uid = "42403";
         //user_uid = intent.getStringExtra("user_uid");
         page = 1;
         Log.e(TAG,"uid是：" + uid + "，token是：" + token + "  user_uid是：" + user_uid);
@@ -135,18 +141,23 @@ public class ZhuyeActivity extends AppCompatActivity {
                         introinfo.setText("啥都没写...");
                     }
 
-                    JSONArray find = dataobject.getJSONArray("findlist");
-                    ArrayList<JSONObject> findlist = new ArrayList<>();
-                    for (int i = 0; i < find.length(); i++){
-                        findlist.add( find.getJSONObject(i));
-                    }
-                    Log.e(TAG, "findlist 的大小为：" + findlist.size() + "\n" + "findlist内容为：" + findlist.toString());
-
+//                    JSONArray find = dataobject.getJSONArray("findlist");
+//                    ArrayList<JSONObject> findlist = new ArrayList<>();
+//                    for (int i = 0; i < find.length(); i++){
+//                        findlist.add( find.getJSONObject(i));
+//                    }
+//                    Log.e(TAG, "findlist 的大小为：" + findlist.size() + "\n" + "findlist内容为：" + findlist.toString());
+//
 //                    if(findlist.size() != 0) {
-//                        findlist_size.setText(findlist.size());
+//                        //发布数
+//                        findlist_size.setText(String.valueOf(findlist.size()));
 //                    }else {
 //                        findlist_size.setText(0);
 //                    }
+//
+//                    find_copy = find;
+
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -161,6 +172,7 @@ public class ZhuyeActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        appbar = (AppBarLayout) findViewById(R.id.appbar);
         app_bg = (ImageView) findViewById(R.id.app_bg);
         allback = (ImageView) findViewById(R.id.allback);
         user_upimg = (ImageView) findViewById(R.id.user_upimg);
@@ -170,7 +182,6 @@ public class ZhuyeActivity extends AppCompatActivity {
         fans = (TextView) findViewById(R.id.fans);
         follow = (TextView) findViewById(R.id.follow);
         findlist_size = (TextView) findViewById(R.id.findlist_size);
-
 
         Log.e(TAG,"user_nick_text  =  " +  user_nick_text);
 
@@ -185,7 +196,7 @@ public class ZhuyeActivity extends AppCompatActivity {
         mTitles.add("资料");
 
         fragmentList = new ArrayList<>();
-        fragmentList.add(new ClubFragment_tuijian());
+        fragmentList.add(new ClubFragment_zhuye_dongtai());
         fragmentList.add(new ClubFragment_zhuye_ziliao());
 
         //getSupportFragmentManager()和getFragmentManager(),getSupportFragmentManager兼容3.0之前
@@ -195,9 +206,6 @@ public class ZhuyeActivity extends AppCompatActivity {
         //绑定
         zhuye_tablayout.setupWithViewPager(zhuye_viewPager);
 
-
-
-
     }
 
     class MyAdapter extends FragmentPagerAdapter {
@@ -205,8 +213,6 @@ public class ZhuyeActivity extends AppCompatActivity {
         public MyAdapter(FragmentManager fm) {
             super(fm);
         }
-
-
 
         @Override
         public Fragment getItem(int position) {
@@ -223,4 +229,5 @@ public class ZhuyeActivity extends AppCompatActivity {
             return mTitles.get(position);
         }
     }
+
 }
