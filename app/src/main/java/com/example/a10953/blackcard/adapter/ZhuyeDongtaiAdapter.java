@@ -227,11 +227,11 @@ public class ZhuyeDongtaiAdapter extends RecyclerView.Adapter<ZhuyeDongtaiAdapte
         }else if(scannum == 4){
             holder.image1.setVisibility(View.VISIBLE);
             holder.image2.setVisibility(View.VISIBLE);
-            holder.image3.setVisibility(View.VISIBLE);
             holder.image4.setVisibility(View.VISIBLE);
+            holder.image5.setVisibility(View.VISIBLE);
 
-            //第五张图片隐藏
-            holder.image5.setVisibility(View.GONE);
+            //显示四张图片，第三张图片隐藏
+            holder.image3.setVisibility(View.GONE);
             //图片总数隐藏
             holder.scannumtext.setVisibility(View.GONE);
 

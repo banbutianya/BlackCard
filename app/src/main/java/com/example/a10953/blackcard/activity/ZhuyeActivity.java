@@ -2,6 +2,7 @@ package com.example.a10953.blackcard.activity;
 
 import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,6 +23,7 @@ import com.example.a10953.blackcard.Listener.HttpCallBackListener;
 import com.example.a10953.blackcard.R;
 import com.example.a10953.blackcard.Util.GlideCircleTransform;
 import com.example.a10953.blackcard.Util.HttpUtil;
+import com.example.a10953.blackcard.Util.NoScrollViewPager;
 import com.example.a10953.blackcard.fragment.ClubFragment_tuijian;
 import com.example.a10953.blackcard.fragment.ClubFragment_zhuye_dongtai;
 import com.example.a10953.blackcard.fragment.ClubFragment_zhuye_ziliao;
@@ -48,7 +50,7 @@ public class ZhuyeActivity extends AppCompatActivity {
     private int page;
 
     private TabLayout zhuye_tablayout;
-    private ViewPager zhuye_viewPager;
+    private NoScrollViewPager zhuye_viewPager;
     private ArrayList<String> mTitles;
     private ArrayList<Fragment> fragmentList;
     private MyAdapter adapter;
@@ -79,6 +81,11 @@ public class ZhuyeActivity extends AppCompatActivity {
     private TextView findlist_size;
 
     private JSONArray find_copy;
+
+    public AppBarLayout getAppbar() {
+        return appbar;
+    }
+
     private AppBarLayout appbar;
 
     @Override
@@ -96,7 +103,7 @@ public class ZhuyeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         uid = intent.getStringExtra("uid");
         token = intent.getStringExtra("token");
-        user_uid = "42403";
+        user_uid = "21334";
         //user_uid = intent.getStringExtra("user_uid");
         page = 1;
         Log.e(TAG,"uid是：" + uid + "，token是：" + token + "  user_uid是：" + user_uid);
@@ -183,11 +190,12 @@ public class ZhuyeActivity extends AppCompatActivity {
         follow = (TextView) findViewById(R.id.follow);
         findlist_size = (TextView) findViewById(R.id.findlist_size);
 
+
         Log.e(TAG,"user_nick_text  =  " +  user_nick_text);
 
 
         zhuye_tablayout = (TabLayout) findViewById(R.id.zhuye_tablayout);
-        zhuye_viewPager = (ViewPager) findViewById(R.id.zhuye_viewPager);
+        zhuye_viewPager = (NoScrollViewPager) findViewById(R.id.zhuye_viewPager);
         mTitles = new ArrayList<>();
         fragmentList = new ArrayList<>();
 

@@ -388,11 +388,11 @@ public class ClubTuijianAdapter extends RecyclerView.Adapter{
                 }else if(scannum == 4){
                     viewHolder.image1.setVisibility(View.VISIBLE);
                     viewHolder.image2.setVisibility(View.VISIBLE);
-                    viewHolder.image3.setVisibility(View.VISIBLE);
                     viewHolder.image4.setVisibility(View.VISIBLE);
+                    viewHolder.image5.setVisibility(View.VISIBLE);
 
-                    //第五张图片隐藏
-                    viewHolder.image5.setVisibility(View.GONE);
+                    //显示三张图片，第三张图片隐藏
+                    viewHolder.image3.setVisibility(View.GONE);
                     //图片总数隐藏
                     viewHolder.scannumtext.setVisibility(View.GONE);
 

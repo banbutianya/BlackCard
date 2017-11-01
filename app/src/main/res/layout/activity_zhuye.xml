@@ -15,14 +15,15 @@
             android:id="@+id/relativeLayout_1"
             android:layout_width="match_parent"
             android:layout_height="190dp"
-            app:layout_scrollFlags="scroll|snap">
+            app:layout_scrollFlags="scroll">
 
             <ImageView
                 android:id="@+id/app_bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="#CCCCCC"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"/>
 
             <ImageView
                 android:id="@+id/allback"
@@ -157,20 +158,34 @@
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:background="#FFFFFF"
-            android:layout_alignParentBottom="true"
             app:layout_scrollFlags="scroll|enterAlways">
         </android.support.design.widget.TabLayout>
 
+
+
     </android.support.design.widget.AppBarLayout>
 
+    <!--<android.support.v4.widget.NestedScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
 
-    <android.support.v4.view.ViewPager
+    <!--<LinearLayout-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+    <!--</LinearLayout>-->
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
+
+
+
+    <com.example.a10953.blackcard.Util.NoScrollViewPager
         android:id="@+id/zhuye_viewPager"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </android.support.v4.view.ViewPager>
-
+    </com.example.a10953.blackcard.Util.NoScrollViewPager>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -183,9 +198,7 @@
             android:layout_height="0.5dp"
             android:background="#CCCCCC"
             />
-
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/linearlayout_6"
@@ -243,9 +256,8 @@
                 android:layout_gravity="center"
                 android:text="举报"
                 android:textSize="12sp"/>
-
         </LinearLayout>
     </LinearLayout>
 
-
 </android.support.design.widget.CoordinatorLayout>
+
