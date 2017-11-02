@@ -9,10 +9,11 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="228dp">
+        android:layout_height="228dp"
+        app:layout_behavior="com.example.a10953.blackcard.z_test.BehaviorAppbarTest">
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout_1"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="190dp"
             app:layout_scrollFlags="scroll">
@@ -23,144 +24,154 @@
                 android:layout_height="match_parent"
                 android:src="#CCCCCC"
                 android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"/>
+                app:layout_collapseMode="parallax"
+                />
 
-            <ImageView
-                android:id="@+id/allback"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/allback"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="8dp" />
+            <RelativeLayout
+                android:id="@+id/relativeLayout_1"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                app:layout_scrollFlags="scroll">
 
-            <ImageView
-                android:id="@+id/user_upimg"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_launcher"
-                android:layout_centerHorizontal="true"
-                android:layout_alignTop="@id/allback" />
-
-            <LinearLayout
-                android:id="@+id/linearlayout_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@id/user_upimg"
-                android:layout_centerHorizontal="true">
-                <TextView
-                    android:id="@+id/user_nick"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="羽诺夕"
-                    android:textSize="18sp"
-                    android:textColor="#FFFFFF"
-                    android:layout_below="@id/user_upimg" />
 
                 <ImageView
-                    android:id="@+id/usersexicon"
+                    android:id="@+id/allback"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/nv"
-                    android:layout_gravity="center" />
-            </LinearLayout>
+                    android:src="@drawable/allback"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="8dp"/>
+                <!--app:layout_collapseMode="pin"-->
 
-            <TextView
-                android:id="@+id/certification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ta很懒哦，什么都没有写..."
-                android:textSize="12sp"
-                android:textColor="#FFFFFF"
-                android:layout_below="@id/linearlayout_1"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="3dp" />
-
-
-            <LinearLayout
-                android:id="@+id/linearlayout_2"
-                android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:orientation="horizontal"
-                android:background="#aa000000"
-                android:layout_alignParentBottom="true">
+                <ImageView
+                    android:id="@+id/user_upimg"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_launcher"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignTop="@id/allback" />
 
                 <LinearLayout
-                    android:id="@+id/linearlayout_3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:id="@+id/linearlayout_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/user_upimg"
+                    android:layout_centerHorizontal="true">
                     <TextView
+                        android:id="@+id/user_nick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="粉丝"
+                        android:text="羽诺夕"
+                        android:textSize="18sp"
                         android:textColor="#FFFFFF"
-                        android:layout_gravity="center" />
-                    <TextView
-                        android:id="@+id/fans"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="32"
-                        android:textColor="#FFFFFF"
+                        android:layout_below="@id/user_upimg" />
+
+                    <ImageView
+                        android:id="@+id/usersexicon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/nv"
                         android:layout_gravity="center" />
                 </LinearLayout>
 
-
-                <LinearLayout
-                    android:id="@+id/linearlayout_4"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="关注"
-                        android:textColor="#FFFFFF"
-                        android:layout_gravity="center" />
-                    <TextView
-                        android:id="@+id/follow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textColor="#FFFFFF"
-                        android:layout_gravity="center" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/certification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ta很懒哦，什么都没有写..."
+                    android:textSize="12sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_below="@id/linearlayout_1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp" />
 
 
                 <LinearLayout
-                    android:id="@+id/linearlayout_5"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="发布"
-                        android:textColor="#FFFFFF"
-                        android:layout_gravity="center" />
-                    <TextView
-                        android:id="@+id/findlist_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="8"
-                        android:textColor="#FFFFFF"
-                        android:layout_gravity="center" />
-                </LinearLayout>
+                    android:id="@+id/linearlayout_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:orientation="horizontal"
+                    android:background="#aa000000"
+                    android:layout_alignParentBottom="true">
 
-            </LinearLayout>
-        </RelativeLayout>
+                    <LinearLayout
+                        android:id="@+id/linearlayout_3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="粉丝"
+                            android:textColor="#FFFFFF"
+                            android:layout_gravity="center" />
+                        <TextView
+                            android:id="@+id/fans"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="32"
+                            android:textColor="#FFFFFF"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearlayout_4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="关注"
+                            android:textColor="#FFFFFF"
+                            android:layout_gravity="center" />
+                        <TextView
+                            android:id="@+id/follow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="#FFFFFF"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearlayout_5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="发布"
+                            android:textColor="#FFFFFF"
+                            android:layout_gravity="center" />
+                        <TextView
+                            android:id="@+id/findlist_size"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="8"
+                            android:textColor="#FFFFFF"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/zhuye_tablayout"
             android:layout_width="match_parent"
             android:layout_height="38dp"
-            android:background="#FFFFFF"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:background="#FFFFFF">
         </android.support.design.widget.TabLayout>
-
 
 
     </android.support.design.widget.AppBarLayout>
@@ -179,13 +190,15 @@
     <!--</android.support.v4.widget.NestedScrollView>-->
 
 
-
     <com.example.a10953.blackcard.Util.NoScrollViewPager
         android:id="@+id/zhuye_viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom">
     </com.example.a10953.blackcard.Util.NoScrollViewPager>
+
 
     <LinearLayout
         android:layout_width="match_parent"

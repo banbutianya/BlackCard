@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,6 +56,8 @@ public class ClubFragment_zhuye_ziliao extends Fragment{
     private TextView hobby;
     private StringBuffer hobby_text;
 
+    private NestedScrollView nestedscrollView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,7 +85,7 @@ public class ClubFragment_zhuye_ziliao extends Fragment{
 
     private void initData() {
 
-        user_id = "21334";
+        user_id = "18701";
 
         map = new HashMap<>();
         map.put("uid",uid);
@@ -129,7 +133,7 @@ public class ClubFragment_zhuye_ziliao extends Fragment{
                         business_text = data.getString("business");
                     }
                     if (TextUtils.isEmpty("intro")) {
-                        intro_text = "保密";
+                        intro_text = "Ta很懒哦。什么都没有写...";
                     } else {
                         intro_text = data.getString("intro");
                     }
@@ -168,7 +172,7 @@ public class ClubFragment_zhuye_ziliao extends Fragment{
 
             @Override
             public void onFail(VolleyError volleyError) {
-
+                Log.e(TAG,"网络请求失败");
             }
         });
 
@@ -181,6 +185,15 @@ public class ClubFragment_zhuye_ziliao extends Fragment{
         business = (TextView) view.findViewById(R.id.business);
         intro = (TextView) view.findViewById(R.id.intro);
         hobby = (TextView) view.findViewById(R.id.hobby);
+        nestedscrollView = (NestedScrollView) view.findViewById(R.id.nestedscrollView);
+
+        nestedscrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+
+
+            }
+        });
 
         hobby_text = new StringBuffer();
 

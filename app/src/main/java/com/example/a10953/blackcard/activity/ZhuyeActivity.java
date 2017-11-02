@@ -103,7 +103,7 @@ public class ZhuyeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         uid = intent.getStringExtra("uid");
         token = intent.getStringExtra("token");
-        user_uid = "21334";
+        user_uid = "18701";
         //user_uid = intent.getStringExtra("user_uid");
         page = 1;
         Log.e(TAG,"uid是：" + uid + "，token是：" + token + "  user_uid是：" + user_uid);
