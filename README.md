@@ -68,6 +68,7 @@ relativeLayout，尽量不用marginTop来控制布局，那样只是看起来对
 
 
 过程中用到的一些博客：
+	
 	RelativeLayout布局常用属性介绍：http://blog.csdn.net/jianghuiquan/article/details/8298687
 
 	Android(4)布局方法、px/dp/dpi/ps/内边距与外边距：http://blog.csdn.net/u013225534/article/details/49388641
