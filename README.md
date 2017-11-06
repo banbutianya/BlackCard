@@ -69,10 +69,32 @@ relativeLayout，尽量不用marginTop来控制布局，那样只是看起来对
 
 过程中用到的一些博客：
 	RelativeLayout布局常用属性介绍：http://blog.csdn.net/jianghuiquan/article/details/8298687
+
 	Android(4)布局方法、px/dp/dpi/ps/内边距与外边距：http://blog.csdn.net/u013225534/article/details/49388641
-	Picasso加载圆角图片：http://blog.csdn.net/ivenes/article/details/53455214
+	
+	Picasso加载圆角图片：    http://blog.csdn.net/ivenes/article/details/53455214
+
 	Android中使用Picasso将图片直接转换为圆形：http://blog.csdn.net/codezjx/article/details/51319048
+
 	Recyclerview下拉刷新控件：BGARefreshLayout
+
 	Volley封装，一行代码搞定http请求：http://blog.csdn.net/ganklun/article/details/43372355
+
 	Android智能下拉刷新框架-SmartRefreshLayout：https://segmentfault.com/a/1190000010066071
+
 	教你上传本地代码到github：http://blog.csdn.net/hanhailong726188/article/details/46738929
+
+	Android控件的隐藏与显示：http://blog.csdn.net/breaker892902/article/details/17790151
+
+	Android:TabLayout向上滑动停留页面顶部：http://blog.csdn.net/zheng_jiao/article/details/76186637
+
+	CoordinatorLayout使用中的坑（还没研读明白，唉。。。）：http://blog.csdn.net/bigggfish/article/details/53585783
+
+	CoordinatorLayout使用：http://www.jianshu.com/p/e8f14a1f16a3
+
+	解决 RecyclerView AppBarLayout 滑动不顺畅的问题：http://www.jianshu.com/p/079fc98dd739
+
+	自定义Behavior实现AppBarLayout越界弹性效果（妙极）：http://blog.csdn.net/gundumw100/article/details/70001472
+
+	ScrollView中嵌套ViewPager时导致ViewPage内容页不显示：http://blog.sina.com.cn/s/blog_5da93c8f0102x5kx.html
+
