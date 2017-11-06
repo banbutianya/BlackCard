@@ -78,7 +78,6 @@ public class ClubFragment_zhuye_dongtai extends Fragment{
         dongtaiPost();
     }
 
-
     private void initView(View view) {
         layoutManager = new LinearLayoutManager(getContext());
         zhuyeDongtaiAdapter = new ZhuyeDongtaiAdapter();
@@ -90,27 +89,20 @@ public class ClubFragment_zhuye_dongtai extends Fragment{
         zhuye_viewPager = (NoScrollViewPager) getActivity().findViewById(R.id.zhuye_viewPager);
         coordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.coordinatorLayout);
 
-
-
-
 //        监听Recyclerview滑动到第一条数据，显示AppBarLayout
-//        recycler_view_dongtai.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-//                    int firstVisiblePosition = layoutManager.findFirstCompletelyVisibleItemPosition();
-//                    if (firstVisiblePosition == 0) {
-//                        appbar.setExpanded(true, true);
-//                    }
-//                }
-//            }
-//        });
-
-
-
+        recycler_view_dongtai.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    int firstVisiblePosition = layoutManager.findFirstCompletelyVisibleItemPosition();
+                    if (firstVisiblePosition == 0) {
+                        appbar.setExpanded(true, true);
+                    }
+                }
+            }
+        });
     }
-
 
     private void dongtaiPost(){
 

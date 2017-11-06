@@ -140,7 +140,10 @@ public class ZhuyeActivity extends AppCompatActivity {
 
 
                     Glide.with(ZhuyeActivity.this).load(user_upimg_url).transform(new GlideCircleTransform(ZhuyeActivity.this)).into(user_upimg);
-                    Glide.with(ZhuyeActivity.this).load(app_bg_url).into(app_bg);
+
+                    //Glide会报错，可能跟app_bg的Android：tag属性有关
+                    //Glide.with(ZhuyeActivity.this).load(app_bg_url).into(app_bg);
+                    Picasso.with(ZhuyeActivity.this).load(app_bg_url).into(app_bg);
                     user_nick.setText(user_nick_text);
                     fans.setText(fans_text);
                     follow.setText(follow_text);
@@ -180,7 +183,8 @@ public class ZhuyeActivity extends AppCompatActivity {
 
     private void initView() {
         appbar = (AppBarLayout) findViewById(R.id.appbar);
-        app_bg = (ImageView) findViewById(R.id.app_bg);
+        //修改试试
+        app_bg = (ImageView) findViewById(R.id.image);
         allback = (ImageView) findViewById(R.id.allback);
         user_upimg = (ImageView) findViewById(R.id.user_upimg);
         user_nick = (TextView) findViewById(R.id.user_nick);

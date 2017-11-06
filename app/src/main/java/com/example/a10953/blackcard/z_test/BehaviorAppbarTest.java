@@ -23,10 +23,15 @@ public class BehaviorAppbarTest extends AppBarLayout.Behavior{
     boolean shouldFling = false;
     float flingVelocityY = 0;
 
+    public BehaviorAppbarTest(){
+
+    }
+
     public BehaviorAppbarTest(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
+    //开始嵌套滚动
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, AppBarLayout child, View target,
                                   int velocityX, int velocityY, int[] consumed) {
@@ -40,6 +45,8 @@ public class BehaviorAppbarTest extends AppBarLayout.Behavior{
         }
     }
 
+
+    //停止滚动时调用
     @Override
     public void onStopNestedScroll(CoordinatorLayout coordinatorLayout, AppBarLayout abl, View target) {
         super.onStopNestedScroll(coordinatorLayout, abl, target);
@@ -48,10 +55,9 @@ public class BehaviorAppbarTest extends AppBarLayout.Behavior{
             onNestedFling(coordinatorLayout, abl, target, 0, flingVelocityY, true);
         }
 
-        Log.e(TAG, "运行了onStopNestedScroll...");
-
     }
 
+    // 当嵌套滚动的子View快速滚动时调用
     @Override
     public boolean onNestedFling(CoordinatorLayout coordinatorLayout, AppBarLayout child, View target,
                                  float velocityX, float velocityY, boolean consumed) {
@@ -74,9 +80,13 @@ public class BehaviorAppbarTest extends AppBarLayout.Behavior{
         }
         Log.d(TAG, "onNestedFling: velocityY - " + velocityY + ", consumed - " + consumed);
 
-        Log.e(TAG, "运行了onNestedFling...");
 
         return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed);
     }
 
+    //当嵌套滚动的子View准备快速滚动时调用
+    @Override
+    public boolean onNestedPreFling(CoordinatorLayout coordinatorLayout, AppBarLayout child, View target, float velocityX, float velocityY) {
+        return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY);
+    }
 }
