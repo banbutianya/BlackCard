@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.VolleyError;
-import com.example.a10953.blackcard.R;
 import com.example.a10953.blackcard.Listener.HttpCallBackListener;
+import com.example.a10953.blackcard.R;
 import com.example.a10953.blackcard.Util.HttpUtil;
 import com.example.a10953.blackcard.adapter.ButlerAdapter;
 import com.example.a10953.blackcard.adapter.WelFareAdapter;
@@ -51,7 +51,6 @@ public class CardFragment extends Fragment{
     private RecyclerView recycler_view_welfare;
     private List<JSONObject> welfareArray = new ArrayList<>();
 
-
     private LinearLayoutManager layoutManagerButler;
     private LinearLayoutManager layoutManagerWelfare;
 
@@ -62,36 +61,24 @@ public class CardFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        Intent intent = getActivity().getIntent();
-        uid = intent.getStringExtra("uid");
-        token = intent.getStringExtra("token");
-        page = 1;
-
-
         View view = inflater.inflate(R.layout.fragment_black_card, container, false);
-        recycler_view_butler = (RecyclerView)view.findViewById(R.id.recycler_view_butler);
-        layoutManagerButler = new LinearLayoutManager(getActivity());
-        layoutManagerButler.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recycler_view_butler.setLayoutManager(layoutManagerButler);
-
-        recycler_view_welfare = (RecyclerView)view.findViewById(R.id.recycler_view_welfare);
-        layoutManagerWelfare = new LinearLayoutManager(getActivity());
-        layoutManagerWelfare.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recycler_view_welfare.setLayoutManager(layoutManagerWelfare);
-
         return view;
     }
+
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        initView(view);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        initData();
         //ButlerPost请求
         ButlerPost();
         //WelFare请求
@@ -188,4 +175,25 @@ public class CardFragment extends Fragment{
         });
     }
 
+
+    private void initData() {
+        Intent intent = getActivity().getIntent();
+        uid = intent.getStringExtra("uid");
+        token = intent.getStringExtra("token");
+        page = 1;
+    }
+
+    private void initView(View view) {
+
+        recycler_view_butler = (RecyclerView)view.findViewById(R.id.recycler_view_butler);
+        layoutManagerButler = new LinearLayoutManager(getActivity());
+        layoutManagerButler.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recycler_view_butler.setLayoutManager(layoutManagerButler);
+
+        recycler_view_welfare = (RecyclerView)view.findViewById(R.id.recycler_view_welfare);
+        layoutManagerWelfare = new LinearLayoutManager(getActivity());
+        layoutManagerWelfare.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recycler_view_welfare.setLayoutManager(layoutManagerWelfare);
+
+    }
 }

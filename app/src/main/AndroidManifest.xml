@@ -3,7 +3,7 @@
     package="com.example.a10953.blackcard">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -22,9 +22,8 @@
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".z_work.dingdanActivity" />
         <activity android:name=".activity.ZhuyeActivity" />
-        <activity android:name=".z_test.ZmoveActivity">
-
-        </activity>
+        <activity android:name=".z_test.ZmoveActivity"></activity>
+        <activity android:name=".activity.Club.EditActivity"></activity>
     </application>
 
 </manifest>

@@ -27,7 +27,7 @@ public class BehaviorImageTest extends AppBarLayout.Behavior {
     private int mParentHeight;      // AppBarLayout的初始高度
     private int mTargetViewHeight;  // 目标View的高度
 
-    private static final float TARGET_HEIGHT = 3000; // 最大滑动距离
+    private static final float TARGET_HEIGHT = 3500; // 最大滑动距离
     private float mTotalDy;     // 总滑动的像素数
     private float mLastScale;   // 最终放大比例
     private int mLastBottom;    // AppBarLayout的最终Bottom值
@@ -160,14 +160,16 @@ public class BehaviorImageTest extends AppBarLayout.Behavior {
     }
 
     private void scale(AppBarLayout abl, View target, int dy) {
-        mTotalDy += -dy;
-        mTotalDy = Math.min(mTotalDy, TARGET_HEIGHT);
-        mLastScale = Math.max(1f, 1f + mTotalDy / TARGET_HEIGHT);
-        ViewCompat.setScaleX(mTargetView, mLastScale);
-        ViewCompat.setScaleY(mTargetView, mLastScale);
-        mLastBottom = mParentHeight + (int) (mTargetViewHeight / 2 * (mLastScale - 1));
-        abl.setBottom(mLastBottom);
-        target.setScrollY(0);
+            dy = -50;
+            mTotalDy += -dy;
+            mTotalDy = Math.min(mTotalDy, TARGET_HEIGHT);
+            mLastScale = Math.max(1f, 1f + mTotalDy / TARGET_HEIGHT);
+            ViewCompat.setScaleX(mTargetView, mLastScale);
+            ViewCompat.setScaleY(mTargetView, mLastScale);
+            mLastBottom = mParentHeight + (int) (mTargetViewHeight / 2 * (mLastScale - 1));
+            abl.setBottom(mLastBottom);
+            target.setScrollY(0);
+
     }
 
     private void recovery(final AppBarLayout abl) {
