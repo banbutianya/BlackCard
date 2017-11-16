@@ -10,6 +10,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a"
+        }
     }
     buildTypes {
         release {
@@ -40,6 +44,12 @@ dependencies {
 
     compile 'com.google.android.gms:play-services-gcm:9.4.0'
     compile 'com.hyphenate:hyphenate-sdk:3.3.0'
+
+    compile(name: 'LiteAVSDK_UGC', ext: 'aar')
+    compile files('libs/cos-sdk-android.1.4.3.11.jar')
+    compile files('libs/okhttp-3.2.0.jar')
+    compile files('libs/sha1utils.jar')
+    compile files('libs/okio-1.6.0.jar')
     
     testCompile 'junit:junit:4.12'
 }
