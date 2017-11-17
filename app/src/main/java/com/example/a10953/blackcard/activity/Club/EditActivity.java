@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a10953.blackcard.R;
+import com.example.a10953.blackcard.activity.Club.shootvideo.TCVideoRecordActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -80,6 +81,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView showphoto;
     private String edit_text;
     private Uri imageUrl;
+    private boolean isPhoto = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +114,11 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        super.onSaveInstanceState(outState);
+    }
 
     private void initView() {
         back = (ImageView) findViewById(R.id.back);
@@ -153,13 +160,15 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.back:
-//                Toast.makeText(this,"点击了返回按钮",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"点击了返回按钮",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.posted:
 //                Toast.makeText(this,"点击了发布按钮",Toast.LENGTH_SHORT).show();
                 edit_text = edit.getText().toString();
-                if(TextUtils.isEmpty(edit_text)){
+                if(TextUtils.isEmpty(edit_text) && isPhoto){
                     Toast.makeText(this,"请输入分享内容或上传照片",Toast.LENGTH_SHORT).show();
+                }else {
+
                 }
                 break;
             case R.id.jiahao:
@@ -228,11 +237,14 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 tianjiahuatiOut();
                 break;
             case R.id.paisheshipin:
-                Toast.makeText(this,"拍摄视频",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this,"拍摄视频",Toast.LENGTH_SHORT).show();
                 tianjiazhaopianOut();
+                Intent intent = new Intent(EditActivity.this, TCVideoRecordActivity.class);
+                startActivity(intent);
                 break;
             case R.id.paishezhaopian:
                 Toast.makeText(this,"拍摄照片",Toast.LENGTH_SHORT).show();
+                tianjiazhaopianOut();
                 sttartPaisheZhaopian();
                 break;
             case R.id.xiangce:
@@ -347,6 +359,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         }else {
             imageUrl = Uri.fromFile(outputImage);
         }
+
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUrl);
         startActivityForResult(intent,TAKE_PHOTO);
@@ -361,46 +374,54 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
         switch (requestCode){
             case TAKE_PHOTO:
-                Bitmap bitmap;
-                long currentTime = System.currentTimeMillis();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
-                String time = sdf.format(new Date(currentTime));
-
-                FileOutputStream b = null;
-                File file = new File("/sdcard/DCIM/BlackCard/");
-                file.mkdirs();// 创建文件夹
-                String fileName = "/sdcard/DCIM/BlackCard/" + "BLACK_CARD_" + time + ".jpg";
-
-                //存入文件
-                try {
-                    b = new FileOutputStream(fileName);
-                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUrl));
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } finally {
+                if (resultCode == RESULT_OK) {
                     try {
-                        b.flush();
-                        b.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+                        Bitmap bitmap;
+                        long currentTime = System.currentTimeMillis();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+                        String time = sdf.format(new Date(currentTime));
 
-                if(resultCode == RESULT_OK){
-                    try{
+                        FileOutputStream b = null;
+                        File file = new File("/sdcard/DCIM/BlackCard/");
+                        file.mkdirs();// 创建文件夹
+                        String fileName = "/sdcard/DCIM/BlackCard/" + "BLACK_CARD_" + time + ".jpg";
+
+                        //存入文件
+                        try {
+                            b = new FileOutputStream(fileName);
+                            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUrl));
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        } finally {
+                            try {
+                                b.flush();
+                                b.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        //把拍摄的照片显示出来
                         bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUrl));
                         jiahao.setVisibility(View.INVISIBLE);
                         showphoto.setVisibility(View.VISIBLE);
+                        isPhoto = false;
+
                         showphoto.setImageBitmap(bitmap);
                         relativelayout_6.setVisibility(View.GONE);
                         gray_layout.setVisibility(View.GONE);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+                } else if (resultCode == RESULT_CANCELED) {
+                    Toast.makeText(EditActivity.this, "拍照取消", Toast.LENGTH_SHORT).show();
                 }
+
                 break;
             case CHOOSE_PHOTO:
                 if(resultCode == RESULT_OK){
@@ -413,7 +434,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 break;
         }
-        super.onActivityResult(requestCode, resultCode, data);
+
     }
 
     @Override

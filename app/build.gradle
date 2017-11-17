@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "27.0.0"
     defaultConfig {
         applicationId "com.example.a10953.blackcard"
-        minSdkVersion 22
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -32,9 +32,9 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.google.code.gson:gson:2.8.2'
-    compile 'com.mcxiaoke.volley:library:1.0.19'
+//    compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.android.support:recyclerview-v7:25.2.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+//    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:design:25.2.0'
     compile 'com.android.support:support-v4:25.2.0'
     compile 'com.bartoszlipinski.recyclerviewheader:library:1.2.0'
@@ -45,11 +45,18 @@ dependencies {
     compile 'com.google.android.gms:play-services-gcm:9.4.0'
     compile 'com.hyphenate:hyphenate-sdk:3.3.0'
 
+
+    //腾讯小视频SDK
+    compile(name: 'volley-1.0.0', ext: 'aar')
     compile(name: 'LiteAVSDK_UGC', ext: 'aar')
+    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile files('libs/cos-sdk-android.1.4.3.11.jar')
     compile files('libs/okhttp-3.2.0.jar')
     compile files('libs/sha1utils.jar')
     compile files('libs/okio-1.6.0.jar')
+
+    //阿里OSS  SDK
+    compile 'com.aliyun.dpa:oss-android-sdk:2.4.5'
     
     testCompile 'junit:junit:4.12'
 }
