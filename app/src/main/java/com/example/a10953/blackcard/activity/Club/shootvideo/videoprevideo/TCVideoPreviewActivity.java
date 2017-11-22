@@ -37,6 +37,7 @@ import java.util.Locale;
 
 public class TCVideoPreviewActivity extends Activity implements View.OnClickListener, ITXLivePlayListener {
     public static final String TAG = "TCVideoPreviewActivity";
+    private static final int YULAN_WINDOW = 4;
 
     private int mVideoSource; // 视频来源
 
@@ -45,8 +46,8 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
     boolean mVideoPause = false;
     boolean mAutoPause = false;
 
-    private ImageView mIvPublish;
-    private ImageView mIvToEdit;
+//    private ImageView mIvPublish;
+//    private ImageView mIvToEdit;
     private String mVideoPath;
     private String mCoverImagePath;
     ImageView mImageViewBg;
@@ -77,10 +78,10 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
         setContentView(R.layout.activity_video_preview);
 
         mStartPreview = (ImageView) findViewById(R.id.record_preview);
-        mIvToEdit = (ImageView) findViewById(R.id.record_to_edit);
-        mIvToEdit.setOnClickListener(this);
+//        mIvToEdit = (ImageView) findViewById(R.id.record_to_edit);
+//        mIvToEdit.setOnClickListener(this);
 
-        mIvPublish = (ImageView) findViewById(R.id.video_publish);
+//        mIvPublish = (ImageView) findViewById(R.id.video_publish);
 
         mVideoSource = getIntent().getIntExtra(TCConstants.VIDEO_RECORD_TYPE, TCConstants.VIDEO_RECORD_TYPE_EDIT);
         mVideoPath = getIntent().getStringExtra(TCConstants.VIDEO_RECORD_VIDEPATH);
@@ -126,11 +127,11 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
         });
         mProgressTime = (TextView) findViewById(R.id.progress_time);
 
-        mIvPublish.setVisibility(View.GONE);
+//        mIvPublish.setVisibility(View.GONE);
 
-        if(mVideoSource == TCConstants.VIDEO_RECORD_TYPE_UGC_RECORD){
-            mIvToEdit.setVisibility(View.VISIBLE);
-        }
+//        if(mVideoSource == TCConstants.VIDEO_RECORD_TYPE_UGC_RECORD){
+//            mIvToEdit.setVisibility(View.VISIBLE);
+//        }
     }
 
     @Override
@@ -157,38 +158,14 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
                     startPlay();
                 }
                 break;
-            case R.id.video_publish:
+//            case R.id.video_publish:
 //                publish();
-                break;
-            case R.id.record_to_edit:
-                startEditVideo();
-                break;
+//                break;
             default:
                 break;
         }
-
     }
 
-    private void startEditVideo() {
-        // 播放器版本没有此activity
-//        Intent intent = new Intent(this, TCVideoEditerActivity.class);
-        Class editActivityClass = null;
-        try {
-            editActivityClass = Class.forName("com.tencent.liteav.demo.shortvideo.editor.TCVideoEditerActivity");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        if(editActivityClass != null){
-            Intent intent = new Intent(this, editActivityClass);
-
-            intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH, mVideoPath);
-            intent.putExtra(TCConstants.VIDEO_RECORD_TYPE, mVideoSource);
-            intent.putExtra(TCConstants.VIDEO_RECORD_RESOLUTION, mVideoResolution);
-            startActivity(intent);
-            finish();
-        }
-    }
 
 
     private boolean startPlay() {
@@ -247,13 +224,18 @@ public class TCVideoPreviewActivity extends Activity implements View.OnClickList
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            Intent intent = new Intent();
+            intent.putExtra("imagePath",mCoverImagePath);
+            intent.putExtra("videoPath",mVideoPath);
+            setResult(YULAN_WINDOW,intent);
+
             finish();
         }
     }
 
     /**
      * 插入视频缩略图
-     *
      * @param videoPath
      * @param coverPath
      */

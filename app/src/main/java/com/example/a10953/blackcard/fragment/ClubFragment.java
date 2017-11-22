@@ -32,6 +32,9 @@ public class ClubFragment extends Fragment implements View.OnClickListener{
     private ArrayList<Fragment> fragmentList;
     private MyAdapter adapter;
 
+    private String uid;
+    private String token;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,6 +49,10 @@ public class ClubFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initData() {
+        Intent i = getActivity().getIntent();
+        uid = i.getStringExtra("uid");
+        token = i.getStringExtra("token");
+
         mTitles = new ArrayList<>();
         mTitles.add("推荐");
         mTitles.add("关注");
@@ -87,6 +94,8 @@ public class ClubFragment extends Fragment implements View.OnClickListener{
             case R.id.fabuanniu:
                 Toast.makeText(getActivity(),"点击了发布按钮",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), EditActivity.class);
+                intent.putExtra("uid",uid);
+                intent.putExtra("token",token);
                 startActivity(intent);
                 break;
         }

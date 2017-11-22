@@ -29,7 +29,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.HomeActivity" />
@@ -37,11 +41,7 @@
         <activity android:name=".activity.ZhuyeActivity" />
         <activity android:name=".z_test.ZmoveActivity"></activity>
         <activity android:name=".activity.Club.EditActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.Club.shootvideo.TCVideoRecordActivity"/>
         <activity android:name=".activity.Club.shootvideo.videoprevideo.TCVideoPreviewActivity"/>

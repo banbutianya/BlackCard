@@ -56,22 +56,6 @@
             android:background="@drawable/icon_record_download"
             android:onClick="onClick"/>
 
-        <ImageView
-            android:id="@+id/video_publish"
-            android:layout_width="@dimen/live_btn_size"
-            android:layout_height="@dimen/live_btn_size"
-            android:layout_centerInParent="true"
-            android:background="@drawable/icon_share"
-            android:onClick="onClick"/>
-
-        <ImageView
-            android:id="@+id/record_to_edit"
-            android:layout_width="@dimen/live_btn_size"
-            android:layout_height="@dimen/live_btn_size"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
-            android:background="@drawable/selector_preview_to_edit"
-            android:onClick="onClick"/>
 
     </RelativeLayout>
 

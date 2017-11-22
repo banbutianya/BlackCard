@@ -49,9 +49,12 @@ import java.util.Locale;
  * UGC小视频录制界面
  */
 public class TCVideoRecordActivity extends Activity implements View.OnClickListener,  TXRecordCommon.ITXVideoRecordListener, View.OnTouchListener, GestureDetector.OnGestureListener, ScaleGestureDetector.OnScaleGestureListener{
-
     private static final String TAG = "TCVideoRecordActivity";
     private static final String OUTPUT_DIR_NAME = "TXUGC";
+
+    private static final int PAISHE_WINDOW = 3;
+    private static final int YULAN_WINDOW = 4;
+
     private boolean mRecording = false;
     private boolean mStartPreview = false;
     private boolean mFront = true;
@@ -490,8 +493,8 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
             } else if (mRecommendQuality == TXRecordCommon.VIDEO_QUALITY_HIGH) {
                 intent.putExtra(TCConstants.VIDEO_RECORD_RESOLUTION, TXRecordCommon.VIDEO_RESOLUTION_720_1280);
             }
-            startActivity(intent);
-            finish();
+            startActivityForResult(intent,YULAN_WINDOW);
+
         }
     }
 
@@ -736,5 +739,21 @@ public class TCVideoRecordActivity extends Activity implements View.OnClickListe
         back();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(resultCode){
+            case YULAN_WINDOW:
+                Intent intent = new Intent();
+                intent.putExtra("imagePath",data.getStringExtra("imagePath"));
+                intent.putExtra("videoPath",data.getStringExtra("videoPath"));
+                setResult(PAISHE_WINDOW,intent);
+                finish();
+                break;
+            default:
+                break;
+        }
 
+
+    }
 }

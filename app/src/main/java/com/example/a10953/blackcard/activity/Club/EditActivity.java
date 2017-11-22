@@ -30,8 +30,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
+import com.alibaba.sdk.android.oss.callback.OSSProgressCallback;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
+import com.android.volley.VolleyError;
+import com.bumptech.glide.Glide;
+import com.example.a10953.blackcard.Listener.HttpCallBackListener;
+import com.example.a10953.blackcard.MyApplication;
 import com.example.a10953.blackcard.R;
+import com.example.a10953.blackcard.Util.HttpUtil;
 import com.example.a10953.blackcard.activity.Club.shootvideo.TCVideoRecordActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,43 +53,31 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 public class EditActivity extends AppCompatActivity implements View.OnClickListener {
+    private String TAG = "EditActivity";
+    private String url = "http://api.qing-hei.com/index.php/Index/Api?type=publish_find";
+
     private static final int TAKE_PHOTO = 1;
     private static final int CHOOSE_PHOTO = 2;
+    private static final int PAISHE_WINDOW = 3;
 
     private ImageView back;
     private TextView posted;
     private EditText edit;
     private ImageView jiahao;
-    private RelativeLayout activity_edit;
-    private RelativeLayout relativelayout_2;
-    private RelativeLayout relativelayout_3;
-    private RelativeLayout relativelayout_4;
-    private RelativeLayout relativelayout_5;
+    private RelativeLayout activity_edit,relativelayout_2,relativelayout_3,relativelayout_4,relativelayout_5;
     private LinearLayout linearlayout_1;
     private View gray_layout;
-    private TextView whom_visible;
-    private TextView allPeople;
-    private TextView myself;
-    private TextView dizhi_show;
-    private TextView huati_show;
+    private TextView whom_visible,allPeople,myself,dizhi_show,huati_show;
 
     //话题列表
-    private TextView gaoxiaoquwen;
-    private TextView yingpingzhixiao;
-    private TextView titanyaowen;
-    private TextView shupingkanpin;
-    private TextView qinghuadashi;
-    private TextView qingheiriqian;
-    private TextView qinzhishenghuo;
+    private TextView gaoxiaoquwen,yingpingzhixiao,titanyaowen,shupingkanpin,qinghuadashi,qingheiriqian,qinzhishenghuo;
 
     //发布用到的控件
     private RelativeLayout relativelayout_6;
-    private TextView paisheshipin;
-    private TextView paishezhaopian;
-    private TextView xiangce;
-    private TextView cancel;
+    private TextView paisheshipin,paishezhaopian,xiangce,cancel;
 
     //拍摄之后现实的缩略图
     private ImageView showphoto;
@@ -83,12 +85,34 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
     private Uri imageUrl;
     private boolean isPhoto = true;
 
+    //小视频缩略图
+    private String mSmallVideo_ImagepPath;
+    private String mSmallVideo_Path;
+    private String mSmallVideoUrl;
+    private String mLoadSmallVideoUrl;
+    private String mSmallVideo_ImageUrl;
+    private String mLoadSmallVideo_ImageUrl;
+
+    //上传用到的参数
+    private String uid;
+    private String token;
+    private String content;
+    private String images;//小图
+    private String imageb;//大图
+    private String location;
+    private String video_url;
+    private String qx;
+    private String to_id;
+
+    //返回的参数
+    private String find_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         initView();
-
+        initData();
         back.setOnClickListener(this);
         posted.setOnClickListener(this);
         jiahao.setOnClickListener(this);
@@ -114,11 +138,23 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    private void initData() {
+        Intent i = getIntent();
+        uid = i.getStringExtra("uid");
+        token = i.getStringExtra("token");
 
-        super.onSaveInstanceState(outState);
+        Log.e(TAG,"uid 是" + uid);
+        Log.e(TAG,"token 是" + token);
+        content = "";
+        images = "";
+        imageb = "";
+        location = "";
+        video_url = "";
+        qx = "1";
+        to_id = "0";
+
     }
+
 
     private void initView() {
         back = (ImageView) findViewById(R.id.back);
@@ -163,87 +199,90 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this,"点击了返回按钮",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.posted:
-//                Toast.makeText(this,"点击了发布按钮",Toast.LENGTH_SHORT).show();
                 edit_text = edit.getText().toString();
+                content = edit_text;
                 if(TextUtils.isEmpty(edit_text) && isPhoto){
                     Toast.makeText(this,"请输入分享内容或上传照片",Toast.LENGTH_SHORT).show();
                 }else {
-
+                    upLoadFile_OSS();
+                    upLoadFile_BlackCard();
                 }
                 break;
             case R.id.jiahao:
-//                Toast.makeText(this,"点击了加号（添加照片或者小视频）",Toast.LENGTH_SHORT).show();
                 tianjiazhaopianInto();
-
                 break;
             case R.id.relativelayout_2:
                 Toast.makeText(this,"调整地理位置",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.relativelayout_3:
-//                Toast.makeText(this,"添加话题",Toast.LENGTH_SHORT).show();
                 tianjiahuatiInto();
                 break;
             case R.id.relativelayout_4:
-//                Toast.makeText(this,"调整对谁可见", Toast.LENGTH_SHORT).show();
                 quanxianshezhiInto();
                 break;
             case R.id.gray_layout:
-//                Toast.makeText(this,"点击了空白处",Toast.LENGTH_SHORT).show();
                 quanxianshezhiOut();
                 tianjiahuatiOut();
                 tianjiazhaopianOut();
                 break;
             case R.id.allPeople:
                 whom_visible.setText("所有人可见");
+                qx = "0";
                 quanxianshezhiOut();
                 break;
             case R.id.myself:
                 whom_visible.setText("仅自己可见");
+                qx = "1";
                 quanxianshezhiOut();
                 break;
             case R.id.gaoxiaoquwen:
                 huati_show.setVisibility(View.VISIBLE);
                 huati_show.setText("#搞笑趣闻#");
+                to_id = "0";
                 tianjiahuatiOut();
                 break;
             case R.id.yingpingzhixiao:
                 huati_show.setVisibility(View.VISIBLE);
                 huati_show.setText("#影评知晓#");
+                to_id = "1";
                 tianjiahuatiOut();
                 break;
             case R.id.titanyaowen:
                 huati_show.setVisibility(View.VISIBLE);
                 huati_show.setText("#体坛要闻#");
+                to_id = "2";
                 tianjiahuatiOut();
                 break;
             case R.id.shupingkanpin:
                 huati_show.setVisibility(View.VISIBLE);
                 huati_show.setText("#书评看品#");
+                to_id = "3";
                 tianjiahuatiOut();
                 break;
             case R.id.qinghuadashi:
                 huati_show.setVisibility(View.VISIBLE);
                 huati_show.setText("#情话大师#");
+                to_id = "4";
                 tianjiahuatiOut();
                 break;
             case R.id.qingheiriqian:
                 huati_show.setVisibility(View.VISIBLE);
                 huati_show.setText("#青黑日签#");
+                to_id = "5";
                 tianjiahuatiOut();
                 break;
             case R.id.pinzhishenghuo:
                 huati_show.setVisibility(View.VISIBLE);
                 huati_show.setText("#品质生活#");
+                to_id = "6";
                 tianjiahuatiOut();
                 break;
             case R.id.paisheshipin:
-//                Toast.makeText(this,"拍摄视频",Toast.LENGTH_SHORT).show();
                 tianjiazhaopianOut();
                 Intent intent = new Intent(EditActivity.this, TCVideoRecordActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,PAISHE_WINDOW);
                 break;
             case R.id.paishezhaopian:
-                Toast.makeText(this,"拍摄照片",Toast.LENGTH_SHORT).show();
                 tianjiazhaopianOut();
                 sttartPaisheZhaopian();
                 break;
@@ -265,6 +304,43 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+    private void upLoadFile_BlackCard() {
+        HashMap<String, String> map = new HashMap<>();
+        //post参数，UID是会员ID，token会变，通过Intent传递过来的
+        map.put("uid", uid);
+        map.put("token", token);
+        map.put("content", content);
+        map.put("images", images);
+        map.put("imageb", imageb);
+        map.put("location", location);
+        map.put("video_url", video_url);
+        map.put("qx", qx);
+        map.put("to_id", to_id);
+
+
+
+        HttpUtil.sendStringRequestByPost(url, map, new HttpCallBackListener() {
+            @Override
+            public void onSuccess(String response) {
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(response);
+                    JSONObject data = object.getJSONObject("data");
+                    find_id = data.getString("find_id");
+                    Log.e(TAG,"find_id 为： " + find_id);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFail(VolleyError volleyError) {
+                Log.e(TAG,"网络请求失败");
+            }
+        });
+    }
+
 
     public void quanxianshezhiInto(){
         linearlayout_1.setVisibility(View.VISIBLE);
@@ -431,10 +507,22 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                         handleImageBeforeKitKat(data);
                     }
                 }
+                break;
+            case PAISHE_WINDOW:
+                mSmallVideo_ImagepPath = data.getStringExtra("imagePath");
+                mSmallVideo_Path = data.getStringExtra("videoPath");
+                Log.e(TAG,"封面路径为：" + mSmallVideo_ImagepPath + "视频路径为：" + mSmallVideo_Path);
+                jiahao.setVisibility(View.INVISIBLE);
+                showphoto.setVisibility(View.VISIBLE);
+                Glide.with(this)
+                        .load(mSmallVideo_ImagepPath)
+                        .centerCrop()
+                        .into(showphoto);
+                isPhoto = false;
+                break;
             default:
                 break;
         }
-
     }
 
     @Override
@@ -449,7 +537,6 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default:
                 break;
-
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
@@ -508,10 +595,103 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
             showphoto.setImageBitmap(bitmap);
             relativelayout_6.setVisibility(View.GONE);
             gray_layout.setVisibility(View.GONE);
-
         } else {
             Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    private void upLoadFile_OSS() {
+        mSmallVideoUrl = "BlackCard/SmallVideo/Video/" + getObjectKey("Black_card") + ".mp4";
+        //上传以后，外网获取的URL地址
+        mLoadSmallVideoUrl = MyApplication.OSS_BUCKET + ".oss-cn-beijing.aliyuncs.com/" + mSmallVideoUrl;
+        Log.e(TAG,mLoadSmallVideoUrl);
+        PutObjectRequest videoPut = new PutObjectRequest(MyApplication.OSS_BUCKET,mSmallVideoUrl,mSmallVideo_Path);
+
+        // 异步上传时可以设置进度回调
+        videoPut.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
+            @Override
+            public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+                if(currentSize/totalSize == 1) {
+                    Log.e(TAG, "视频上传完成");
+                }
+            }
+        });
+
+        MyApplication.oss.asyncPutObject(videoPut, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+            @Override
+            public void onSuccess(final PutObjectRequest request, PutObjectResult result) {
+                Log.e("PutObject", "UploadSuccess");
+                Log.e("ETag", result.getETag());
+                Log.e("RequestId", result.getRequestId());
+            }
+
+            @Override
+            public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+                // 请求异常
+                if (clientExcepion != null) {
+                    // 本地异常如网络异常等
+                    clientExcepion.printStackTrace();
+                }
+                if (serviceException != null) {
+                    // 服务异常
+                    Log.e("ErrorCode", serviceException.getErrorCode());
+                    Log.e("RequestId", serviceException.getRequestId());
+                    Log.e("HostId", serviceException.getHostId());
+                    Log.e("RawMessage", serviceException.getRawMessage());
+                }
+
+            }
+        });
+        video_url = mLoadSmallVideoUrl;
+
+
+        //imageUrl = "BlackCard/SmallVideo/Cover sheet/" + getObjectKey("Black_card") + ".jpg";
+        mSmallVideo_ImageUrl = mSmallVideoUrl.replace(".mp4",".jpg");
+        mLoadSmallVideo_ImageUrl = MyApplication.OSS_BUCKET + ".oss-cn-beijing.aliyuncs.com/" + mSmallVideo_ImageUrl;
+        Log.e(TAG,mLoadSmallVideo_ImageUrl);
+        PutObjectRequest imagePut = new PutObjectRequest(MyApplication.OSS_BUCKET, mSmallVideo_ImageUrl, mSmallVideo_ImagepPath);
+
+        // 异步上传时可以设置进度回调
+        imagePut.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
+            @Override
+            public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+                if(currentSize/totalSize == 1) {
+                    Log.e(TAG, "图片上传完成");
+                }
+            }
+        });
+
+        MyApplication.oss.asyncPutObject(imagePut, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+            @Override
+            public void onSuccess(final PutObjectRequest request, PutObjectResult result) {
+                Log.e("PutObject", "UploadSuccess");
+                Log.e("ETag", result.getETag());
+                Log.e("RequestId", result.getRequestId());
+            }
+
+            @Override
+            public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+                // 请求异常
+                if (clientExcepion != null) {
+                    // 本地异常如网络异常等
+                    clientExcepion.printStackTrace();
+                }
+                if (serviceException != null) {
+                    // 服务异常
+                    Log.e("ErrorCode", serviceException.getErrorCode());
+                    Log.e("RequestId", serviceException.getRequestId());
+                    Log.e("HostId", serviceException.getHostId());
+                    Log.e("RawMessage", serviceException.getRawMessage());
+                }
+            }
+        });
+    }
+
+    //通过UserCode 加上日期组装 OSS路径
+    private String getObjectKey(String strUserCode){
+        Date date = new Date();
+        return new SimpleDateFormat("yyyy-M-d").format(date)+"/"+strUserCode+new SimpleDateFormat("yyyyMMddssSSS").format(date);
     }
 
 }
